@@ -1,10 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
- 
+// import App from "../App";
+import Addideas from "../Pages/Addideas"
+import Ideas from "../Pages/Ideas"
 const Router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <App />,
+  // },
   {
     path: "/",
-    element: <App />,
+    element: <Ideas />,
+  },
+  {
+    path: "/",
+    element: <Addideas />,
   },
  
  
