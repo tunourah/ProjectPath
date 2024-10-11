@@ -1,18 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
-// import App from "../App";
+import App from "../App";
 import Addideas from "../Pages/Addideas"
 import Ideas from "../Pages/Ideas"
 const Router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <App />,
-  // },
+  {
+    path: "/App",
+    element: <App />,
+  },
   {
     path: "/",
     element: <Ideas />,
   },
   {
-    path: "/",
+    path: "/AddIdeas",
     element: <Addideas />,
   },
  
