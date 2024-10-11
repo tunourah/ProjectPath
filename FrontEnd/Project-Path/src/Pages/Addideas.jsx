@@ -10,16 +10,16 @@ const ProjectForm = () => {
     console.log("Project created:", { title, type, description });
   };
 
-  const handleDelete = () => {
-    setTitle("");
-    setType("");
-    setDescription("");
-  };
+  // const handleDelete = () => {
+  //   setTitle("");
+  //   setType("");
+  //   setDescription("");
+  // };
 
   return (
     <div>
       <div className=" flex flex-col items-center p-6 bg-base-100 rounded-lg shadow-lg max-w-lg mx-auto mt-8">
-        <h2 className="text-xl self-start font-semibold mb-4">user name</h2>
+        <div className="text-xl self-start font-semibold mb-4 flex"><span className="mx-2"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0AC6F2"><path d="M440-240h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg></span><span>Add Project</span></div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
           <div className="form-control">
             <label className="label">
@@ -59,7 +59,7 @@ const ProjectForm = () => {
             <button
               className="btn bg-[#0AC6F2] hover:bg-[#0AC6F2] hover:bg-opacity-50 text-white mx-2"
               onClick={handleCreate}>
-              Create
+            Create <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></span> 
             </button>
             <dialog id="my_modal_1" className="modal">
               <div className="modal-box text-center flex flex-col items-center">
@@ -81,11 +81,11 @@ const ProjectForm = () => {
                 </div>
               </div>
             </dialog>
-            <button
+            {/* <button
               className="btn bg-gray-100 text-[#0AC6F2]"
               onClick={handleDelete}>
-              Delete
-            </button>
+             Clear<span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0AC6F2"><path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z"/></svg></span> 
+            </button> */}
           </div>
         </div>
       </div>

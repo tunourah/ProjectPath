@@ -25,7 +25,7 @@ function Ideas() {
   return (
     <div className="container mx-auto p-6">
       <div className="text-start">
-        <h1 className="text-2xl font-bold">user name</h1> 
+        {/* <h1 className="text-2xl font-bold">user name</h1>  */}
         <div className="text-4xl font-bold mt-2 flex">
            <span>
             <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0AC6F2"><path d="M480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-200v-80h320v80H320Zm10-120q-69-41-109.5-110T180-580q0-125 87.5-212.5T480-880q125 0 212.5 87.5T780-580q0 81-40.5 150T630-320H330Zm24-80h252q45-32 69.5-79T700-580q0-92-64-156t-156-64q-92 0-156 64t-64 156q0 54 24.5 101t69.5 79Zm126 0Z"/></svg>
@@ -43,8 +43,8 @@ function Ideas() {
 
       {/* Pagination */}
       <div className="join w-32">
-        <button className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe]">Previous page</button>
-        <button className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe]">Next</button>
+        <button className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe] hover:opacity-60">Previous page</button>
+        <button className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe] hover:opacity-60">Next</button>
       </div>
     </div>
   );
