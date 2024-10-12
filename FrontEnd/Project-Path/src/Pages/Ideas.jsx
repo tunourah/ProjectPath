@@ -73,10 +73,8 @@ function Ideas() {
   return (
     <div>
     <div className="flex h-screen">
-      {/* Navigation (Left) */}
       <Nav className="w-1/4 bg-gray-800 text-white p-6" />
   
-      {/* Content (Right) */}
       <div className="flex-1 container mx-auto p-6">
         <div className="text-start">
           <div className="text-4xl font-bold mt-2 flex">
