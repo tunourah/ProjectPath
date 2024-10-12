@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { MdComment } from "react-icons/md";
 
 Modal.setAppElement("#root");
 
@@ -58,7 +59,7 @@ const TableStd = ({ headers }) => {
   const actions = {
     "In Progress": [
       {
-        label: "...",  
+        label: <MdComment />,  
         handler: () => openActionModal("In Progress"), 
        
       },
@@ -66,7 +67,8 @@ const TableStd = ({ headers }) => {
     Accepted: [],
     Rejected: [
       {
-        label: "...", // Label it as "Reject"
+        label: <MdComment />
+        ,  
         handler: () => openActionModal("Rejected"), 
        
       },

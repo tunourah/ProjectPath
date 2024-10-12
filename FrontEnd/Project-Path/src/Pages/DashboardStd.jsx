@@ -1,7 +1,7 @@
 import Nav from '../Component/Nav';
 import Card from '../Component/Card';
 
-function Dashboard() {
+function DashboardStd() {
   return (
     <>
       <section className='w-full flex'>
@@ -10,14 +10,19 @@ function Dashboard() {
           <h2 className='font-bold text-2xl p-5'>UserName</h2>
           <div className='flex justify-around flex-wrap gap-2'>
             <Card 
-              title="Projects" 
+              title="Show The Staet Of Projects" 
               imgSrc="https://i.ibb.co/rtzrftR/students.jpg" 
-              link="/tableproject"
+              link="/tablestate"
             />
             <Card 
-              title="Students" 
+              title="The Ideas" 
               imgSrc="https://i.ibb.co/R4G2WJ2/student.jpg" 
-              link="/tablestd"
+              link="/ideas"
+            />
+             <Card 
+              title="Add You Idea " 
+              imgSrc="https://i.ibb.co/R4G2WJ2/student.jpg" 
+              link="/addideas"
             />
           </div>
         </section>
@@ -26,4 +31,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashboardStd;
