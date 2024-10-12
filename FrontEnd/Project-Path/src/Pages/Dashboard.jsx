@@ -12,7 +12,7 @@ function Dashboard() {
   </div>
   </section>
   </section>
-  </>;
+  </>
 }
 
 export default Dashboard;
