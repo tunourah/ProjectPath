@@ -49,7 +49,7 @@ function App() {
           id="about"
         >
           <div className="md:my-4 md:h-[350px]">
-            <img src={Landing} className="object-contain h-auto md:h-full" />
+            <img src={Landing} className="rotate-180 object-contain h-auto md:h-full" />
           </div>
 
           <div className="flex flex-col gap-6 md:w-1/2 md:pl-0 pl-8">
