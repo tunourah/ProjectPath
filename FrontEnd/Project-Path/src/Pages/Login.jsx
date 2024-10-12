@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { Link } from "react-router-dom";
-import FooterLogo from "../assets/Footer-logo.png";
+import { IoIosArrowBack } from "react-icons/io";
+import LogIn from "../assets/Login-img.png";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -27,13 +28,14 @@ function Login() {
   return (
     <div>
       <div className="flex items-center justify-center h-screen">
-        <div className="rounded-3xl px-4 py-12 shadow-xl shadow-[#00293333] text-center flex flex-col items-center gap-4 md:gap-8 xl:w-2/5 md:w-9/12 w-full">
-          <Link to="/">
-            <img
-              src={FooterLogo}
-              className="h-[40px] object-cover rounded-full"
-            />
-          </Link>
+        <div className="rounded-3xl px-4 pb-12 pt-6 shadow-xl bg-transparent z-10 shadow-[#00293333] text-center flex flex-col items-center gap-4 md:gap-8 xl:w-2/5 md:w-9/12 w-full">
+          <div className="w-full h-0 text-2xl">
+            <div className="w-fit rounded-full p-2">
+              <Link to="/" className="p-2">
+                <IoIosArrowBack />
+              </Link>
+            </div>
+          </div>
 
           <h1 className="font-medium text-4xl">Hello!</h1>
 
@@ -124,6 +126,20 @@ function Login() {
             </button>
           </div>
         </div>
+
+        <div className="absolute md:bottom-40 md:right-40 bottom-32 right-4">
+          <img src={LogIn} className="h-[50px]" />
+        </div>
+
+        <div className="rounded-full bg-[#97C4C7] p-2 absolute md:top-52 md:left-60 top-52 left-4"></div>
+
+        <div className="p-4 rounded-full border border-[#002933] absolute md:top-60 md:left-52 top-52 left-4"></div>
+
+        <div className="p-4 rounded-full border border-[#002933] absolute md:bottom-40 md:left-60 bottom-40 left-20"></div>
+
+        <div className="bg-[#97C4C7] p-4 rounded-full absolute md:top-40 md:right-60 top-32 right-20"></div>
+
+        <div className="bg-[#97C4C7] p-2 rounded-full absolute md:bottom-52 md:left-40 bottom-60 right-20 w-fit"></div>
       </div>
     </div>
   );
