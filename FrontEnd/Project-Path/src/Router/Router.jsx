@@ -4,11 +4,11 @@ import Addideas from "../Pages/Addideas"
 import Ideas from "../Pages/Ideas"
 const Router = createBrowserRouter([
   {
-    path: "/App",
+    path: "/",
     element: <App />,
   },
   {
-    path: "/",
+    path: "/Ideas",
     element: <Ideas />,
   },
   {
