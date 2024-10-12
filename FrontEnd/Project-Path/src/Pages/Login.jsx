@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoMdArrowRoundForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import LogIn from "../assets/Login-img.png";
 
@@ -10,6 +10,8 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorBorder, setErrorBorder] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
     if (email === "" || password === "") {
       errorLog("Please fill in all fields!");
@@ -18,6 +20,8 @@ function Login() {
 
     setEmail("");
     setPassword("");
+
+    navigate("/dashboard");
   };
 
   const errorLog = (message) => {

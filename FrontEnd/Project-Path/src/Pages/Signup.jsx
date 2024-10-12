@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoMdArrowRoundForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import SignUp from "../assets/Signup-img.png";
 
@@ -11,6 +11,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorBorder, setErrorBorder] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     if (
@@ -27,6 +29,8 @@ function Signup() {
     setSecondName("");
     setEmail("");
     setPassword("");
+
+    navigate("/dashboard");
   };
 
   const errorLog = (message) => {
