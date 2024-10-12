@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Header from "../Component/Header";
+import Nav from "../Component/Nav";
 
 const ProjectForm = () => {
   const [title, setTitle] = useState("");
@@ -19,6 +21,7 @@ const ProjectForm = () => {
   return (
     <div>
       <div className=" flex flex-col items-center p-6 bg-base-100 rounded-lg shadow-lg max-w-lg mx-auto mt-8">
+        
         <div className="text-xl self-start font-semibold mb-4 flex"><span className="mx-2"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0AC6F2"><path d="M440-240h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg></span><span>Add Project</span></div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
           <div className="form-control">
