@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+ import Dashboard from '../Pages/Dashboard'
 import Login from "../Pages/Login";
 import Signup from "../Pages/Signup";
 import ErrorPage from "../Pages/ErrorPage";
@@ -29,6 +30,9 @@ const Router = createBrowserRouter([
     element: <Addideas />,
   },
  
- 
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
 ]);
 export default Router;
