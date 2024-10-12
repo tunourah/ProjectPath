@@ -61,19 +61,19 @@ const Deletestd = ({ headers }) => {
   ];
 
   return (
-    <div className="p-4 m-5">
+    <div className="p-4 overflow-hidden"> {/* Added overflow-hidden */}
       <div className="relative px-2 overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex items-center justify-between flex-col md:flex-row flex-wrap space-y-4 md:space-y-0 py-6 px-4 bg-white dark:bg-gray-900">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">All Projects</h2>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full"> {/* Added w-full for better responsive alignment */}
             <label htmlFor="table-search" className="sr-only">Search</label>
-            <div className="relative">
+            <div className="relative w-full md:w-auto"> {/* Changed width for responsive input */}
               <input
                 type="text"
                 id="table-search-users"
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search "
               />
             </div>
@@ -185,8 +185,9 @@ const Deletestd = ({ headers }) => {
               backgroundColor: 'rgba(0, 0, 0, 0.75)',
             },
             content: {
-              width: '500px',
-              height: '300px', // Adjusted height for confirmation
+              width: '90%', // Changed width to be more responsive
+              maxWidth: '500px', // Added max-width
+              height: '300px',
               top: '50%',
               left: '50%',
               right: 'auto',
@@ -206,16 +207,16 @@ const Deletestd = ({ headers }) => {
               <button
                 type="button"
                 onClick={closeModal}
-                className="mr-2 px-4 py-2 bg-gray-400 rounded-lg text-white hover:bg-gray-500 transition-colors duration-200"
+                className="text-gray-500 hover:text-gray-700"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleDelete}
-                className="px-4 py-2 bg-red-500 rounded-lg text-white hover:bg-red-600 transition-colors duration-200"
+                className="text-red-600 hover:text-red-800 ml-4"
               >
-                Confirm
+                Delete
               </button>
             </div>
           </div>
@@ -223,15 +224,16 @@ const Deletestd = ({ headers }) => {
 
         {/* Modal for project details */}
         <Modal
-          isOpen={Boolean(selectedProject)} // Show project details modal if a project is selected
+          isOpen={isModalOpen && selectedProject} // Show project details modal only if a project is selected
           onRequestClose={closeModal}
           style={{
             overlay: {
               backgroundColor: 'rgba(0, 0, 0, 0.75)',
             },
             content: {
-              width: '500px',
-              height: '300px', // Adjusted height for project details
+              width: '90%', // Changed width to be more responsive
+              maxWidth: '500px', // Added max-width
+              height: '300px',
               top: '50%',
               left: '50%',
               right: 'auto',
@@ -244,23 +246,55 @@ const Deletestd = ({ headers }) => {
             },
           }}
         >
-          {selectedProject && (
-            <div className="p-10 w-full">
-              <h2 className="text-lg font-semibold">{selectedProject.projectName}</h2>
-              <p className="mt-2 text-gray-600">Student Name: {selectedProject.studentName}</p>
-              <p className="mt-2 text-gray-600">Status: {selectedProject.status}</p>
-              <div className="mt-4 flex justify-end">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="px-4 py-2 bg-gray-400 rounded-lg text-white hover:bg-gray-500 transition-colors duration-200"
-                >
-                  Close
-                </button>
-              </div>
+          <div className="p-10 w-full">
+            <h2 className="text-lg font-semibold">Project Details</h2>
+            <p><strong>Student Name:</strong> {selectedProject?.studentName}</p>
+            <p><strong>Project Name:</strong> {selectedProject?.projectName}</p>
+            <p><strong>Status:</strong> {selectedProject?.status}</p>
+            <div className="mt-4 flex justify-end">
+              <button
+                type="button"
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                Close
+              </button>
             </div>
-          )}
+          </div>
         </Modal>
+        {/* Responsive cards for small screens */}
+<div className="block md:hidden space-y-4 p-4">
+  {projects.map((project, index) => (
+    <div key={index} className="bg-white p-4 shadow-md rounded-lg overflow-hidden"> {/* Added overflow-hidden */}
+      <div className="flex items-center space-x-3">
+        <div>
+          <div className="text-base font-semibold">{project.studentName}</div>
+        </div>
+      </div>
+      <div className="mt-2 text-sm">
+        <strong>Project:</strong> {project.projectName}
+      </div>
+      <div className="text-sm truncate"> {/* Added truncate for overflow handling */}
+        <strong>Idea:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ducimus quos rem sapiente esse, assumenda alias veniam autem.
+      </div>
+      <div className="text-sm">
+        <strong>Status:</strong> {project.status}
+      </div>
+      <div className="mt-2 flex justify-between"> {/* Changed to flex for button alignment */}
+        {actions.map((action, actionIndex) => (
+          <button
+            key={actionIndex}
+            onClick={() => action.handler(project)} // Pass the current project to the action handler
+            className={`${action.className} hover:underline mx-1`} // Corrected this line
+          >
+            {action.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );

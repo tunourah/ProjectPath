@@ -59,21 +59,19 @@ const TableStd = ({ headers }) => {
   const actions = {
     "In Progress": [
       {
-        label: <MdComment />,  
-        handler: () => openActionModal("In Progress"), 
-       
+        label: <MdComment />,
+        handler: () => openActionModal("In Progress"),
       },
     ],
     Accepted: [],
     Rejected: [
       {
-        label: <MdComment />
-        ,  
-        handler: () => openActionModal("Rejected"), 
-       
+        label: <MdComment />,
+        handler: () => openActionModal("Rejected"),
       },
     ],
   };
+
   return (
     <div className="p-4 m-5">
       <div className="relative px-2 overflow-x-auto shadow-md sm:rounded-lg">
@@ -81,7 +79,7 @@ const TableStd = ({ headers }) => {
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             All Projects
           </h2>
-          <div className="flex flex-col md:flex-row  justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <label htmlFor="table-search" className="sr-only">
               Search
             </label>
@@ -91,7 +89,7 @@ const TableStd = ({ headers }) => {
                 id="table-search-users"
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full md:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search "
               />
             </div>
@@ -207,6 +205,7 @@ const TableStd = ({ headers }) => {
           </tbody>
         </table>
 
+        {/* Modal for action */}
         <Modal
   isOpen={isModalOpen && !selectedProject}
   onRequestClose={closeModal}
@@ -296,93 +295,88 @@ const TableStd = ({ headers }) => {
 </Modal>
 
 
-
-        
-              {/* Modal for project details */}
-              <Modal
-          isOpen={isModalOpen && !!selectedProject} // Show project details modal only if a project is selected
+        {/* Modal for project details */}
+        <Modal
+          isOpen={isModalOpen && selectedProject}
           onRequestClose={closeModal}
           style={{
             overlay: {
-              backgroundColor: 'rgba(0, 0, 0, 0.75)',
+              backgroundColor: "rgba(0, 0, 0, 0.75)",
             },
             content: {
-              width: '500px',
-              height: 'auto',
-              top: '50%',
-              left: '50%',
-              right: 'auto',
-              bottom: 'auto',
-              marginRight: '-50%',
-              transform: 'translate(-50%, -50%)',
-              padding: '30px',
-              borderRadius: '8px',
-              overflow: 'auto',
+              width: "90%",  
+              maxWidth: "500px",  
+              height: "auto", 
+              top: "50%",
+              left: "50%",
+              right: "auto",
+              bottom: "auto",
+              marginRight: "-50%",
+              transform: "translate(-50%, -50%)",
+              padding: "20px",
+              borderRadius: "10px",
+              textAlign: "center",
             },
           }}
         >
-       <div className="p-5">
-  <h2 className="text-lg font-semibold mb-4">Project Details</h2>
-  
-  <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-4">
-    <p className="text-gray-700">
-      <strong>Student Name:</strong> {selectedProject?.studentName}
-    </p>
-    <p className="text-gray-700">
-      <strong>Project Name:</strong> {selectedProject?.projectName}
-    </p>
-    <p className="text-gray-700">
-      <strong>Idea:</strong> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum labore cupiditate enim assumenda non tempore, iusto ex nemo quibusdam officiis laborum error excepturi exercitationem eum adipisci. Excepturi, molestiae quis. Non?
-    </p>
-    <p className="text-gray-700">
-      <strong>Status:</strong> {selectedProject?.status}
-    </p>
-  </div>
-
-  <div className="mt-4 flex justify-end">
-    <button 
-      onClick={closeModal} 
-      className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors duration-200"
-    >
-      Close
-    </button>
-  </div>
-</div>
-
+          {selectedProject ? (  
+            <>
+              <h2 className="text-lg font-semibold mb-2">Project Details</h2>
+              <p>
+                <strong>Student Name:</strong> {selectedProject.studentName}
+              </p>
+              <p>
+                <strong>Project Name:</strong> {selectedProject.projectName}
+              </p>
+              <p>
+                <strong>Status:</strong> {selectedProject.status}
+              </p>
+              <button
+                onClick={closeModal}
+                className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
+              >
+                Close
+              </button>
+            </>
+          ) : (
+            <p>Loading...</p> 
+          )}
         </Modal>
-        
-       {/* Responsive cards for small screens */}
- 
+{/* Responsive cards for small screens */}
 <div className="block md:hidden space-y-4 p-4">
-  {projects.map((project, index) => (
-    <div key={index} className="bg-white p-4 shadow-md rounded-lg">
-      <div className="flex items-center space-x-3">
-        <div>
-          <div className="text-base font-semibold">{project.studentName}</div>
+  {projects.length === 0 ? ( // Check if there are projects to display
+    <div className="text-center text-gray-500">No projects available.</div>
+  ) : (
+    projects.map((project, index) => (
+      <div key={index} className="bg-white p-4 shadow-md rounded-lg overflow-hidden">  
+        <div className="flex items-center space-x-3">
+          <div>
+            <div className="text-base font-semibold">{project.studentName}</div>
+          </div>
+        </div>
+        <div className="mt-2 text-sm">
+          <strong>Project:</strong> {project.projectName}
+        </div>
+        <div className="text-sm truncate">  
+          <strong>Idea:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ducimus quos rem sapiente esse, assumenda alias veniam autem.
+        </div>
+        <div className="text-sm">
+          <strong>Status:</strong> {project.status}
+        </div>
+        <div className="mt-2 flex justify-between">  
+          {actions[project.status]?.map((action, actionIndex) => (
+            <button
+              key={actionIndex}
+              onClick={() => action.handler(project)}  
+              className={`${action.className} hover:underline mx-1`}  
+            >
+              {action.label}
+            </button>
+          ))}
         </div>
       </div>
-      <div className="mt-2 text-sm">
-        <strong>Project:</strong> {project.projectName}
-      </div>
-      <div className="text-sm">
-        <strong>Idea:</strong>  Lorem ipsum dolor, sit amet consecteturitate saepe quasi ducimus quos rem sapiente esse, assumenda alias veniam autem.
-      </div>
-      <div className="text-sm">
-        <strong>Status:</strong> {project.status}
-      </div>
-      <div className="mt-2">
-        {actions[project.status]?.map((action, actionIndex) => (
-          <button
-            key={actionIndex}
-            onClick={() => action.handler(project)} // Pass the current project to the action handler
-            className={`${action.className} hover:underline mx-1`} // Corrected this line
-          >
-            {action.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  ))}
+    ))
+  )}
 </div>
 
       </div>
@@ -391,3 +385,4 @@ const TableStd = ({ headers }) => {
 };
 
 export default TableStd;
+
