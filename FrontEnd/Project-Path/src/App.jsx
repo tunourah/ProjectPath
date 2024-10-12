@@ -1,7 +1,14 @@
 import "./App.css";
+import Table from "./Component/Table";
 
 function App() {
-  return <></>;
+  const headers = ["Student Name", "Project Name"];  
+
+  return (
+    <>
+      <Table headers={headers} />
+    </>
+  );
 }
 
 export default App;

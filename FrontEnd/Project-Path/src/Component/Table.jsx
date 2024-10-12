@@ -36,6 +36,7 @@ const Table = ({ headers }) => {
     { studentName: "Yousef", projectName: "AI Chatbot", status: "In Progress" },
     { studentName: "Ahmed", projectName: "E-commerce Website", status: "Accepted" },
     { studentName: "Mada", projectName: "Portfolio Website", status: "Rejected" },
+    
   ];
 
   const actions = [
@@ -61,7 +62,7 @@ const Table = ({ headers }) => {
       <div className="relative px-2 overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex items-center justify-between flex-col md:flex-row flex-wrap space-y-4 md:space-y-0 py-6 px-4 bg-white dark:bg-gray-900">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">All Projects</h2>
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row  justify-between items-center gap-4">
             <label htmlFor="table-search" className="sr-only">Search</label>
             <div className="relative">
             <input
@@ -73,7 +74,7 @@ const Table = ({ headers }) => {
                 placeholder="Search "
               />
             </div>
-            <div className="relative inline-block">
+            <div className=" relative  inline-block ">
               <button
                 id="dropdownActionButton"
                 onClick={toggleDropdown}
@@ -125,57 +126,58 @@ const Table = ({ headers }) => {
         </div>
 
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              {headers.map((header, index) => (
-                <th key={index} scope="col" className="px-6 py-3">{header}</th>
-              ))}
-              <th scope="col" className="px-6 py-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-          {projects.map((project, index) => (
-              <tr
-                key={index}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                {headers.includes("Student Name") && (
-                  <td className="px-6 py-4">{project.studentName}</td>
-                )}
-                {headers.includes("Project Name") && (
-                  <td className="px-6 py-4">{project.projectName}</td>
-                )}
-                {headers.includes("Status") && (
-                  <td className="px-6 py-4">
-                    <div className="flex items-center">
-                      <div
-                        className={`h-2.5 w-2.5 rounded-full ${
-                          project.status === "In Progress"
-                            ? "bg-yellow-500"
-                            : project.status === "Accepted"
-                            ? "bg-green-500"
-                            : "bg-red-500"
-                        } mr-2`}
-                      ></div>
-                      {project.status}
-                    </div>
-                  </td>
-                )}
-                <td className="px-6 py-4">
-                  {actions.map((action, actionIndex) => (
-                    <button
-                      key={actionIndex}
-                      onClick={() => action.handler(project)} // Pass the current project to the action handler
-                      className={`${action.className} hover:underline ml-2`}
-                    >
-                      {action.label}
-                    </button>
-                  ))}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      {headers.map((header, index) => (
+        <th key={index} scope="col" className="px-6 py-3">{header}</th>
+      ))}
+      <th scope="col" className="px-8 py-3 text-right" colSpan={1}>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {projects.map((project, index) => (
+      <tr
+        key={index}
+        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      >
+        {headers.includes("Student Name") && (
+          <td className="px-6 py-4">{project.studentName}</td>
+        )}
+        {headers.includes("Project Name") && (
+          <td className="px-6 py-4">{project.projectName}</td>
+        )}
+        {headers.includes("Status") && (
+          <td className="px-6 py-4">
+            <div className="flex items-center">
+              <div
+                className={`h-2.5 w-2.5 rounded-full ${
+                  project.status === "In Progress"
+                    ? "bg-yellow-500"
+                    : project.status === "Accepted"
+                    ? "bg-green-500"
+                    : "bg-red-500"
+                } mr-2`}
+              ></div>
+              {project.status}
+            </div>
+          </td>
+        )}
+        <td className="px-6 py-4 text-right">
+          {actions.map((action, actionIndex) => (
+            <button
+              key={actionIndex}
+              onClick={() => action.handler(project)} // Pass the current project to the action handler
+              className={`${action.className} hover:underline ml-2`}
+            >
+              {action.label}
+            </button>
+          ))}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
 
         {/* Modal for actions */}
         <Modal
@@ -219,7 +221,7 @@ const Table = ({ headers }) => {
         </Modal>
 
         {/* Responsive cards for small screens */}
-        <div className="block md:hidden space-y-4 p-4">
+        {/* <div className="block md:hidden space-y-4 p-4">
           {projects.map((project, index) => (
             <div key={index} className="bg-white p-4 shadow-md rounded-lg">
               <div className="flex items-center space-x-3">
@@ -246,7 +248,7 @@ const Table = ({ headers }) => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
