@@ -147,17 +147,26 @@ function App() {
               </p>
             </div>
           </div>
+
+          <div className="flex md:justify-start justify-center mt-12">
+            <Link
+              to="/signup"
+              className="font-bold text-base border-2 border-[#0AC6F2] px-8 py-2 rounded-full hover:bg-[#0AC6F2] hover:border-[#0AC6F2] hover:text-[#002933]"
+            >
+              Get Started
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Contact section */}
       <div className="bg-[#F4F5F6] rounded-tr-[200px] rounded-bl-[200px]">
         <div className="container mx-auto px-4 py-20" id="contact">
-          <h1 className="text-center font-bold md:text-4xl text-2xl mb-20">
+          <h1 className="text-center font-bold md:text-4xl text-2xl md:mb-20">
             Contact us
           </h1>
 
-          <div className="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+          <div className="grid gap-4 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 p-8">
             <div className="bg-white drop-shadow shadow-[#002933] rounded-lg p-4 flex flex-col gap-4">
               <a
                 href="https://github.com/tunourah"
