@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#nav{
+    
+
+    min-height:100vh;
+    max-height: 100%;
+}
+
+
+@media (max-width: 700px) {
+
+    #nav{
+      position: absolute;
+      width:100% !important;
+      right:100%;
+      box-shadow:0 !important;
+      transition:right .5s;
+    }
+ 
+  }
