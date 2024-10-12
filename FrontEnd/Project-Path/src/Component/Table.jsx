@@ -50,7 +50,7 @@ const Table = ({ headers }) => {
   const actions = [
     {
       label: 'Accept',
-      handler: (project) => alert(`Accepting ${project.projectName}`),
+     
       className: 'text-gray-600',
     },
     {
