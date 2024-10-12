@@ -9,21 +9,30 @@ const Table = ({ headers }) => {
   const [reason, setReason] = useState("");
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProject, setSelectedProject] = useState(null); // New state for selected project
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-  const openModal = (action) => {
+
+  const openActionModal = (action) => {
     setActionType(action);
+    setModalOpen(true);
+  };
+
+  const openProjectDetailsModal = (project) => {
+    setSelectedProject(project); // Set the selected project
     setModalOpen(true);
   };
 
   const closeModal = () => {
     setModalOpen(false);
     setReason("");
+    setSelectedProject(null); // Reset selected project
   };
 
   const handleSubmit = (e) => {
@@ -36,7 +45,6 @@ const Table = ({ headers }) => {
     { studentName: "Yousef", projectName: "AI Chatbot", status: "In Progress" },
     { studentName: "Ahmed", projectName: "E-commerce Website", status: "Accepted" },
     { studentName: "Mada", projectName: "Portfolio Website", status: "Rejected" },
-    
   ];
 
   const actions = [
@@ -47,12 +55,12 @@ const Table = ({ headers }) => {
     },
     {
       label: 'Reject',
-      handler: (project) => openModal("reject"),
+      handler: (project) => openActionModal("reject"),
       className: 'text-gray-600',
     },
     {
       label: 'Edit',
-      handler: (project) => openModal("edit"),
+      handler: (project) => openActionModal("edit"),
       className: 'text-blue-600',
     },
   ];
@@ -65,7 +73,7 @@ const Table = ({ headers }) => {
           <div className="flex flex-col md:flex-row  justify-between items-center gap-4">
             <label htmlFor="table-search" className="sr-only">Search</label>
             <div className="relative">
-            <input
+              <input
                 type="text"
                 id="table-search-users"
                 value={searchTerm}
@@ -121,67 +129,70 @@ const Table = ({ headers }) => {
                 </ul>
               </div>
             </div>
-
           </div>
         </div>
 
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-    <tr>
-      {headers.map((header, index) => (
-        <th key={index} scope="col" className="px-6 py-3">{header}</th>
-      ))}
-      <th scope="col" className="px-8 py-3 text-right" colSpan={1}>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {projects.map((project, index) => (
-      <tr
-        key={index}
-        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-      >
-        {headers.includes("Student Name") && (
-          <td className="px-6 py-4">{project.studentName}</td>
-        )}
-        {headers.includes("Project Name") && (
-          <td className="px-6 py-4">{project.projectName}</td>
-        )}
-        {headers.includes("Status") && (
-          <td className="px-6 py-4">
-            <div className="flex items-center">
-              <div
-                className={`h-2.5 w-2.5 rounded-full ${
-                  project.status === "In Progress"
-                    ? "bg-yellow-500"
-                    : project.status === "Accepted"
-                    ? "bg-green-500"
-                    : "bg-red-500"
-                } mr-2`}
-              ></div>
-              {project.status}
-            </div>
-          </td>
-        )}
-        <td className="px-6 py-4 text-right">
-          {actions.map((action, actionIndex) => (
-            <button
-              key={actionIndex}
-              onClick={() => action.handler(project)} // Pass the current project to the action handler
-              className={`${action.className} hover:underline ml-2`}
-            >
-              {action.label}
-            </button>
-          ))}
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
+        <table className="w-full hidden sm:inline-table    text-sm text-left text-gray-500 dark:text-gray-400 ">
+          <thead className="text-xs border  rounded-lg  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr className="">
+              {headers.map((header, index) => (
+                <th key={index} scope="col" className="px-6 py-3">{header}</th>
+              ))}
+              <th scope="col" className="px-8 py-3 text-right" colSpan={1}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projects.map((project, index) => (
+              <tr
+                key={index}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
+                {headers.includes("Student Name") && (
+                  <td className="px-6 py-4">{project.studentName}</td>
+                )}
+                {headers.includes("Project Name") && (
+                  <td
+                    className="px-6 py-4 cursor-pointer text-blue-600 hover:underline"
+                    onClick={() => openProjectDetailsModal(project)} // Open modal with project details
+                  >
+                    {project.projectName}
+                  </td>
+                )}
+                {headers.includes("Status") && (
+                  <td className="px-6 py-4">
+                    <div className="flex items-center">
+                      <div
+                        className={`h-2.5 w-2.5 rounded-full ${
+                          project.status === "In Progress"
+                            ? "bg-yellow-500"
+                            : project.status === "Accepted"
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                        } mr-2`}
+                      ></div>
+                      {project.status}
+                    </div>
+                  </td>
+                )}
+                <td className="px-6 py-4 text-right">
+                  {actions.map((action, actionIndex) => (
+                    <button
+                      key={actionIndex}
+                      onClick={() => action.handler(project)} // Pass the current project to the action handler
+                      className={`${action.className} hover:underline ml-2`}
+                    >
+                      {action.label}
+                    </button>
+                  ))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
         {/* Modal for actions */}
         <Modal
-          isOpen={isModalOpen}
+          isOpen={isModalOpen && !selectedProject} // Show action modal only if no project is selected
           onRequestClose={closeModal}
           style={{
             overlay: {
@@ -214,44 +225,103 @@ const Table = ({ headers }) => {
               />
               <div className="mt-4 flex justify-end">
                 <button type="button" onClick={closeModal} className="mr-2 px-4 py-2 bg-cyan-200 rounded-lg text-white hover:bg-cyan-300 transition-colors duration-200">Cancel</button>
-                <button type="submit" className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors duration-200">Submit</button>
+                
+                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">Submit</button>
               </div>
             </form>
           </div>
         </Modal>
 
-        {/* Responsive cards for small screens */}
-        {/* <div className="block md:hidden space-y-4 p-4">
-          {projects.map((project, index) => (
-            <div key={index} className="bg-white p-4 shadow-md rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div>
-                  <div className="text-base font-semibold">{project.studentName}</div>
-                </div>
-              </div>
-              <div className="mt-2 text-sm">
-                <strong>Project:</strong> {project.projectName}
-              </div>
-              <div className="text-sm">
-                <strong>Status:</strong> {project.status}
-              </div>
-              <div className="mt-2">
-                {actions.map((action, actionIndex) => (
-                  <button
-                    key={actionIndex}
-                    onClick={() => action.handler(project)} // Pass the current project to the action handler
-                    className={`${action.className} hover:underline mx-1`}
-                  >
-                    {action.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div> */}
+        {/* Modal for project details */}
+        <Modal
+          isOpen={isModalOpen && !!selectedProject} // Show project details modal only if a project is selected
+          onRequestClose={closeModal}
+          style={{
+            overlay: {
+              backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            },
+            content: {
+              width: '500px',
+              height: 'auto',
+              top: '50%',
+              left: '50%',
+              right: 'auto',
+              bottom: 'auto',
+              marginRight: '-50%',
+              transform: 'translate(-50%, -50%)',
+              padding: '30px',
+              borderRadius: '8px',
+              overflow: 'auto',
+            },
+          }}
+        >
+       <div className="p-5">
+  <h2 className="text-lg font-semibold mb-4">Project Details</h2>
+  
+  <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-4">
+    <p className="text-gray-700">
+      <strong>Student Name:</strong> {selectedProject?.studentName}
+    </p>
+    <p className="text-gray-700">
+      <strong>Project Name:</strong> {selectedProject?.projectName}
+    </p>
+    <p className="text-gray-700">
+      <strong>Idea:</strong> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum labore cupiditate enim assumenda non tempore, iusto ex nemo quibusdam officiis laborum error excepturi exercitationem eum adipisci. Excepturi, molestiae quis. Non?
+    </p>
+    <p className="text-gray-700">
+      <strong>Status:</strong> {selectedProject?.status}
+    </p>
+  </div>
+
+  <div className="mt-4 flex justify-end">
+    <button 
+      onClick={closeModal} 
+      className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors duration-200"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
+        </Modal>
+         {/* Responsive cards for small screens */}
+       {/* Responsive cards for small screens */}
+<div className="block md:hidden space-y-4 p-4">
+  {projects.map((project, index) => (
+    <div key={index} className="bg-white p-4 shadow-md rounded-lg">
+      <div className="flex items-center space-x-3">
+        <div>
+          <div className="text-base font-semibold">{project.studentName}</div>
+        </div>
+      </div>
+      <div className="mt-2 text-sm">
+        <strong>Project:</strong> {project.projectName}
+      </div>
+      <div className="text-sm">
+        <strong>Idea:</strong>  Lorem ipsum dolor, sit amet consecteturitate saepe quasi ducimus quos rem sapiente esse, assumenda alias veniam autem.
+      </div>
+      <div className="text-sm">
+        <strong>Status:</strong> {project.status}
+      </div>
+      <div className="mt-2">
+        {actions.map((action, actionIndex) => (
+          <button
+            key={actionIndex}
+            onClick={() => action.handler(project)} // Pass the current project to the action handler
+            className={`${action.className} hover:underline mx-1`} // Corrected this line
+          >
+            {action.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );
 };
 
 export default Table;
+  
