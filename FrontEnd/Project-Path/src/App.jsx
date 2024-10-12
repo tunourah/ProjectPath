@@ -169,6 +169,30 @@ function App() {
           <div className="grid gap-4 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 p-8">
             <div className="bg-white drop-shadow shadow-[#002933] rounded-lg p-4 flex flex-col gap-4">
               <a
+                href="https://www.linkedin.com/in/noura-a-altuwaim/"
+                target="_blank"
+                className="flex items-center gap-4"
+              >
+                <div className="text-xl text-[#002933]">
+                  <FaLinkedinIn />
+                </div>
+
+                <p>Noura A.</p>
+              </a>
+
+              <a
+                href="mailto:nourahaltuaim@gmail.com"
+                target="_blank"
+                className="flex items-center gap-4"
+              >
+                <div className="text-xl text-[#002933]">
+                  <BiLogoGmail />
+                </div>
+
+                <p>nourahaltuaim@gmail.com</p>
+              </a>
+
+              <a
                 href="https://github.com/tunourah"
                 target="_blank"
                 className="flex items-center gap-4"
