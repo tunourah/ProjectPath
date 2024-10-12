@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "../Component/Header";
 import Nav from "../Component/Nav";
 
 const Card = ({ title, date, description }) => (
@@ -73,8 +72,6 @@ function Ideas() {
 
   return (
     <div>
-       <Header />
-   
     <div className="flex h-screen">
       {/* Navigation (Left) */}
       <Nav className="w-1/4 bg-gray-800 text-white p-6" />
