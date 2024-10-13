@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Nav from '../Component/Nav';
+import StudentCard from '../Component/StudentCard'
 function Dashboard() {
   return <>
   <section className='w-full flex '>
@@ -8,16 +9,13 @@ function Dashboard() {
   <h2 className='font-bold text-2xl p-5'>UserName</h2>
   <div className='flex justify-around flex-wrap gap-2 '>
     <Link to="">
-    <div className="w-[330px] h-[180px] rounded-md border-solid border-2 border-[#26dec6] pr-5 flex items-center justify-center">
-    <img src="https://i.ibb.co/rtzrftR/students.jpg" alt="" srcset="" className='w-1/5 pb-12'/>
-    <h2 className='font-bold text-4xl'>Projects</h2>
-    </div>
+    
+    <StudentCard descrptn={""} title={"Projects"} img={"https://i.ibb.co/sF0S9qt/project.png"} />
+
     </Link>
     <Link to="">
-    <div className="w-[330px] h-[180px] rounded-md border-solid border-2 border-[#26dec6] pr-5 flex items-center justify-center">
-    <img src="https://i.ibb.co/R4G2WJ2/student.jpg" alt="" srcset="" className='w-1/5 pb-12'/>
-    <h2 className=' font-bold text-4xl'>Students</h2>
-    </div>
+    <StudentCard descrptn={""} title={"Students"} img={"https://i.ibb.co/rZN4dHG/student-1.png"} />
+
     </Link>
   </div>
   </section>

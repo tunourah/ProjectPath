@@ -13,7 +13,7 @@ function Nav() {
   <img className="md:invisible visible absolute left-[85%] top-4 z-1" src="https://i.ibb.co/d0dgRNS/close.png" onClick={hide}/>
  
 <ul className="text-[#6d6d6d] " >
-<li  className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-[black]" >project<span className="text-[#26dec6]">path </span><img className="w-1/5 max-w-12 pl-1" src="https://i.ibb.co/4Z3LnpB/logo-g.png" alt="" srcset="" /></li>
+<li  className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-[black]" >project<span className="text-[#26dec6]">path </span><img className="w-1/5 max-w-12 pl-1" src="https://i.ibb.co/FX9QzQ8/logo-g.png" alt="" srcset="" /></li>
 <Link to="/dashboard"> <li className=" p-3 flex items-center"> <img src="https://i.ibb.co/W073rqm/four-squares-button-of-view-options.png" alt="" srcset="" className="w-3 mr-3"/> Dashboard</li></Link>
 <Link to="">  <li className="p-3 flex items-center"><img src="https://i.ibb.co/W073rqm/four-squares-button-of-view-options.png" alt="" srcset="" className="w-3 mr-3"/> Students</li></Link>
 <Link to=""><li className="p-3 flex items-center"><img src="https://i.ibb.co/W073rqm/four-squares-button-of-view-options.png" alt="" srcset="" className="w-3 mr-3"/> Projects</li></Link>
