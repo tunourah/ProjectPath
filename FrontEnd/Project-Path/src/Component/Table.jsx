@@ -143,7 +143,7 @@ const Table = ({ headers }) => {
     {
       label: "Edit",
       handler: (project) => openActionModal("edit"),
-      className: "text-blue-600",
+      className: "text-[#0AC6F2]",
     },
   ];
 
@@ -224,7 +224,7 @@ const Table = ({ headers }) => {
                   )}
                   {headers.includes("Project Name") && (
                     <td
-                      className="px-6 py-4 cursor-pointer text-blue-600 hover:underline"
+                      className="px-6 py-4 cursor-pointer text-[#0AC6F2] hover:underline"
                       onClick={() => openProjectDetailsModal(project)} // Open modal with project details
                     >
                       {project.projectName}
@@ -415,7 +415,7 @@ const Table = ({ headers }) => {
               {/* Modal Trigger for Project Details */}
               {headers.includes("Project Name") && (
                 <div
-                  className="mt-2 cursor-pointer text-blue-600 hover:underline font-medium"
+                  className="mt-2 cursor-pointer text-[#0AC6F2] hover:underline font-medium"
                   onClick={() => openProjectDetailsModal(project)} // Open modal with project details
                 >
                   View Project Details
