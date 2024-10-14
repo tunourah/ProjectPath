@@ -228,15 +228,7 @@ const Deletestd = ({ headers }) => {
                   {headers.includes("Status") && (
                     <td className="px-6 py-4">
                       <div className="flex items-center">
-                        <div
-                          className={`h-2.5 w-2.5 rounded-full ${
-                            project.status === "In Progress"
-                              ? "bg-yellow-500"
-                              : project.status === "Accepted"
-                              ? "bg-green-500"
-                              : "bg-red-500"
-                          } mr-2`}
-                        ></div>
+                 
                         {project.status}
                       </div>
                     </td>
@@ -246,16 +238,7 @@ const Deletestd = ({ headers }) => {
                       <button
                         key={actionIndex}
                         onClick={() => action.handler(project)}
-                        className={`ml-2 ${action.className} ${
-                          acceptedProjects.includes(project.projectName) &&
-                          action.label !== "Accept"
-                            ? "cursor-not-allowed text-gray-400"
-                            : "hover:underline"
-                        }`}
-                        disabled={
-                          acceptedProjects.includes(project.projectName) &&
-                          action.label !== "Accept"
-                        } // Disable the button
+                        className={`ml-2 ${action.className}`}  
                       >
                         {action.label}
                       </button>
@@ -422,27 +405,14 @@ const Deletestd = ({ headers }) => {
               {/* Action Buttons (Accept, Reject, Edit) */}
               <div className="mt-4 flex flex-col space-y-2">
                 {actions.map((action, actionIndex) => {
-                  // Define button styles based on action type
-                  const buttonStyles = {
-                    Accept: " border border-green-500   hover:bg-green-600",
-                    Reject: " border border-red-500   hover:bg-red-600",
-                    Edit: " border border-yellow-500   hover:bg-yellow-600",
-                  };
+                 
 
                   return (
                     <button
                       key={actionIndex}
                       onClick={() => action.handler(project)}
-                      className={`w-full px-4 py-2 rounded-md transition-colors duration-200 ${
-                        acceptedProjects.includes(project.projectName) &&
-                        action.label !== "Accept"
-                          ? "cursor-not-allowed text-gray-400 border-gray-400"
-                          : buttonStyles[action.label] // Use dynamic styles for the buttons
-                      }`}
-                      disabled={
-                        acceptedProjects.includes(project.projectName) &&
-                        action.label !== "Accept"
-                      } // Disable buttons if project is accepted
+                      className={`w-full px-4 py-2 rounded-md transition-colors duration-200 `}
+               
                     >
                       {action.label}
                     </button>

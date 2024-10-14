@@ -395,66 +395,67 @@ const Table = ({ headers }) => {
 
         {/* Responsive cards for small screens */}
         <div className="block sm:hidden space-y-4 p-4">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 shadow-lg rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl duration-300"
-            >
-              {/* Student Info */}
-              <div className="flex items-center space-x-2 mb-2">
-                <div className="font-semibold text-lg text-gray-800">
-                  {project.studentName}
-                </div>
-              </div>
-
-              {/* Project Info */}
-              <div className="text-sm text-gray-600">
-                <strong>Project:</strong> {project.projectName}
-              </div>
-
-              {/* Modal Trigger for Project Details */}
-              {headers.includes("Project Name") && (
-                <div
-                  className="mt-2 cursor-pointer text-[#0AC6F2] hover:underline font-medium"
-                  onClick={() => openProjectDetailsModal(project)} // Open modal with project details
-                >
-                  View Project Details
-                </div>
-              )}
-
-              {/* Action Buttons (Accept, Reject, Edit) */}
-              <div className="mt-4 flex flex-col space-y-2">
-                {actions.map((action, actionIndex) => {
-                  // Define button styles based on action type
-                  const buttonStyles = {
-                    Accept: " border border-green-500   hover:bg-green-600",
-                    Reject: " border border-red-500   hover:bg-red-600",
-                    Edit: " border border-yellow-500   hover:bg-yellow-600",
-                  };
-
-                  return (
-                    <button
-                      key={actionIndex}
-                      onClick={() => action.handler(project)}
-                      className={`w-full px-4 py-2 rounded-md transition-colors duration-200 ${
-                        acceptedProjects.includes(project.projectName) &&
-                        action.label !== "Accept"
-                          ? "cursor-not-allowed text-gray-400 border-gray-400"
-                          : buttonStyles[action.label] // Use dynamic styles for the buttons
-                      }`}
-                      disabled={
-                        acceptedProjects.includes(project.projectName) &&
-                        action.label !== "Accept"
-                      } // Disable buttons if project is accepted
-                    >
-                      {action.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+  {projects.map((project, index) => (
+    <div
+      key={index}
+      className="bg-white p-6 shadow-lg rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl duration-300"
+    >
+      {/* Student Info */}
+      <div className="flex items-center  space-x-2 mb-2">
+        <div className="font-semibold text-lg text-gray-800">
+          {project.studentName}
         </div>
+      </div>
+
+      {/* Project Info */}
+      <div className="text-sm text-gray-600">
+        <strong>Project:</strong> {project.projectName}
+      </div>
+
+      {/* Modal Trigger for Project Details */}
+      {headers.includes("Project Name") && (
+        <div
+          className="mt-2 cursor-pointer text-[#0AC6F2] hover:underline font-medium"
+          onClick={() => openProjectDetailsModal(project)} // Open modal with project details
+        >
+          View Project Details
+        </div>
+      )}
+
+      {/* Action Buttons (Accept, Reject, Edit) */}
+      <div className="mt-4 flex flex-row flex-wrap space-x-2"> {/* Flex row and spacing between buttons */}
+        {actions.map((action, actionIndex) => {
+          // Define button styles based on action type
+          const buttonStyles = {
+            Accept: "border border-green-800 w-full mb-2 text-green-800 hover:bg-green-800 hover:text-white",
+            Reject: "border border-red-800 text-red-800 hover:bg-red-800 hover:text-white",
+            Edit: "border border-yellow-800 text-yellow-800 hover:bg-yellow-800 hover:text-white",
+          };
+
+          return (
+            <button
+              key={actionIndex}
+              onClick={() => action.handler(project)}
+              className={`px-3 py-1 text-sm rounded-md transition-colors duration-200 ${
+                acceptedProjects.includes(project.projectName) &&
+                action.label !== "Accept"
+                  ? "cursor-not-allowed text-gray-400 border-gray-400"
+                  : buttonStyles[action.label] // Use dynamic styles for the buttons
+              }`}
+              disabled={
+                acceptedProjects.includes(project.projectName) &&
+                action.label !== "Accept"
+              } // Disable buttons if project is accepted
+            >
+              {action.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );
