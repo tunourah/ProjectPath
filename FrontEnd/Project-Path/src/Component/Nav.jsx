@@ -1,6 +1,6 @@
 import "../App.css";
 import { Link } from "react-router-dom";
-
+import Logo from "../assets/logo.png";
 function Nav() {
   function hide() {
     document.querySelector("nav").style.right = "100%";
@@ -31,11 +31,12 @@ function Nav() {
         />
         <ul className="text-[#6d6d6d]">
           <li className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-black p-3 hover:bg-[#f0f0f0] transition duration-200">
-            project<span className="text-[#26dec6]">path </span>
+            project<span className="text-[#26dec6] mr-2">path </span>
             <img 
-              className="w-1/5 max-w-12 pl-1" 
-              src="https://i.ibb.co/4Z3LnpB/logo-g.png" 
-              alt="" 
+              className="w-10 h-10 pl-1" 
+              src={Logo} 
+              
+              alt="LOGO" 
             />
           </li>
           <Link to="/dashboard">

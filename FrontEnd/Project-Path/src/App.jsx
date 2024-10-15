@@ -2,6 +2,7 @@ import { HashLink as Link } from "react-router-hash-link";
 import "./App.css";
 import FooterLogo from "./assets/Footer-logo.png";
 import Landing from "./assets/Landing-img.png";
+import About from "./assets/About.png";
 import Features from "./assets/Features-img.png";
 import Header from "./Component/Header";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -49,7 +50,7 @@ function App() {
           id="about"
         >
           <div className="md:my-4 md:h-[350px]">
-            <img src={Landing} className="rotate-180 object-contain h-auto md:h-full" />
+            <img src={About} className="rotate-180 object-contain h-auto md:h-full" />
           </div>
 
           <div className="flex flex-col gap-6 md:w-1/2 md:pl-0 pl-8">
