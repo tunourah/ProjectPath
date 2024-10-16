@@ -1,11 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const cors = require('cors');
-require('dotenv').config();
+import mongoose from "mongoose"
+import express from "express";
+import Idea from "./models/Idea.js"
+import User from "./models/User.js"
+import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import cors from 'cors';
+dotenv.config();
 
-const User = require('./models/User');
-const Idea = require('./models/Idea');
 const app = express();
 const port = 3000;
 
@@ -14,13 +16,13 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-    });
-  })
-  .catch((err) => console.log(err));
+// mongoose.connect(, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => {
+//     app.listen(port, () => {
+//       console.log(`Server running on port ${port}`);
+//     });
+//   })
+//   .catch((err) => console.log(err));
 
 // Signup Route
 app.post('/signup', async (req, res) => {
@@ -58,3 +60,15 @@ app.get("/addIdea",(req,res)=>{
   res.send(result)
  })
 })
+
+main().catch(err => console.log(err));
+async function main() { 
+    await mongoose.connect("mongodb+srv://Mada:Mada123456@blog.mqytf.mongodb.net/");
+  console.log("----------------////////////")
+    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+  }
+
+  app.listen(port, function () {
+    console.log("Express App running at mongod");
+ })
+
