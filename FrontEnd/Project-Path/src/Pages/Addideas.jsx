@@ -1,11 +1,23 @@
 import { useState } from "react";
 import Nav from "../Component/Nav";
+import { useNavigate } from "react-router-dom";
 
 const ProjectForm = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
+
+  const userData = JSON.parse(localStorage.getItem("user"));
+  if (!userData) {
+    navigate("/signup");
+  }
+
+  if (userData.firstName === "admin") {
+    navigate("/dashboard");
+  }
 
   const handleCreate = async () => {
     try {
@@ -43,7 +55,13 @@ const ProjectForm = () => {
       <div className="flex-1 p-6 bg-base-100 rounded-lg shadow-lg mx-8 mt-16">
         <div className="text-xl font-semibold mb-4 flex">
           <span className="mx-2">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0AC6F2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#0AC6F2"
+            >
               <path d="M440-240h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
             </svg>
           </span>
@@ -92,7 +110,13 @@ const ProjectForm = () => {
             >
               Create
               <span>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#ffffff">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="http://www.w3.org/2000/svg"
+                  width="24px"
+                  fill="#ffffff"
+                >
                   <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                 </svg>
               </span>
@@ -110,7 +134,9 @@ const ProjectForm = () => {
                     <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
                   </svg>
                 </div>
-                <p className="py-4">{success ? "Idea Successfully sent!" : "Failed to send idea."}</p>
+                <p className="py-4">
+                  {success ? "Idea Successfully sent!" : "Failed to send idea."}
+                </p>
                 <div className="modal-action flex justify-center border-2">
                   <form method="dialog">
                     <button className="btn bg-[#0AC6F2] text-white">OK</button>
