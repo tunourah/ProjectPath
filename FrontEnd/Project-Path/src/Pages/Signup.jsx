@@ -70,21 +70,21 @@ function Signup() {
     }
 
     axios
-      .post("https://670438ecab8a8f89273356ec.mockapi.io/testAPI", {
-        firstName: firstName,
-        secondName: secondName,
-        email: email,
-        password: password,
-      })
-      .then(function (response) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            firstName: firstName,
-            secondName: secondName,
-            email: email,
-          })
-        );
+    .post("http://localhost:8000/signup", {
+      firstName: firstName,
+      secondName: secondName,
+      email: email,
+      password: password,
+    })
+    .then(function (response) {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          firstName: firstName,
+          secondName: secondName,
+          email: email,
+        })
+      );
 
         setFirstName("");
         setSecondName("");
@@ -94,10 +94,15 @@ function Signup() {
         navigate("/dashboardstd");
       })
       .catch(function (error) {
-        console.log(error);
-      });
-  };
-
+        if (error.response) {
+            // Show user-friendly error messages based on response
+            errorLog(error.response.data.message || 'Signup failed!');
+        } else {
+            console.log('Error Message:', error.message);
+        }
+    });
+    
+    };
   const errorLog = (message) => {
     setErrorMessage(message);
     setErrorBorder("border-[#FF6565]");
