@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import SignUp from "../assets/Signup-img.png";
+import axios from "axios";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -12,7 +13,21 @@ function Signup() {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorBorder, setErrorBorder] = useState("");
 
+  const [signData, setSignData] = useState([]);
+  const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("https://670438ecab8a8f89273356ec.mockapi.io/testAPI")
+      .then(function (response) {
+        setUsers(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const handleSubmit = () => {
     if (
@@ -25,12 +40,63 @@ function Signup() {
       return;
     }
 
-    setFirstName("");
-    setSecondName("");
-    setEmail("");
-    setPassword("");
+    if (firstName.length < 2 || secondName.length < 2) {
+      errorLog("Name must be more than 2 characters!");
+      return;
+    }
 
-    navigate("/dashboard");
+    if (
+      !email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+    ) {
+      errorLog("Write a valid email address!!");
+      return;
+    }
+
+    if (!email.includes("@twaiq.edu.sa")) {
+      errorLog("Your email must have a domain from Twaiq Academia!!");
+      return;
+    }
+
+    if (password.length < 8) {
+      errorLog("Password must be more than 8 characters!!");
+      return;
+    }
+
+    const user = users.find((data) => data.email === email);
+    if (user) {
+      errorLog("Email is taken!");
+      return;
+    }
+
+    axios
+      .post("https://670438ecab8a8f89273356ec.mockapi.io/testAPI", {
+        firstName: firstName,
+        secondName: secondName,
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            firstName: firstName,
+            secondName: secondName,
+            email: email,
+          })
+        );
+
+        setFirstName("");
+        setSecondName("");
+        setEmail("");
+        setPassword("");
+
+        navigate("/dashboard");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const errorLog = (message) => {

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import LogIn from "../assets/Login-img.png";
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,13 +11,46 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorBorder, setErrorBorder] = useState("");
 
+  const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("https://670438ecab8a8f89273356ec.mockapi.io/testAPI")
+      .then(function (response) {
+        setUsers(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const handleSubmit = () => {
     if (email === "" || password === "") {
       errorLog("Please fill in all fields!");
       return;
     }
+
+    const user = users.find((data) => data.email === email);
+    if (!user) {
+      errorLog("Email or password is wrong!");
+      return;
+    }
+
+    if (user.password !== password) {
+      errorLog("Email or password is wrong!");
+      return;
+    }
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        firstName: user.firstName,
+        secondName: user.secondName,
+        email: user.email,
+      })
+    );
 
     setEmail("");
     setPassword("");
