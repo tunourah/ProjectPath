@@ -2,18 +2,19 @@ import { useNavigate } from "react-router-dom";
 import Nav from "../Component/Nav";
 import StudentCard from "../Component/StudentCard";
 import Card from "../Component/StudentCard";
+import { useEffect } from "react";
 
 function DashboardStd() {
   const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("user"));
-  if (!userData) {
-    navigate("/signup");
-  }
-
-  if (userData.firstName === "admin") {
-    navigate("/dashboard");
-  }
+  useEffect(() => {
+    if (!userData) {
+      navigate("/signup");
+    } else if (userData.firstName === "admin") {
+      navigate("/dashboard");
+    }
+  });
 
   return (
     <>

@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "../Component/Nav";
+import { useNavigate } from "react-router-dom";
 
 const ProjectForm = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
+
+  const userData = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (!userData) {
+      navigate("/signup");
+    } else if (userData.firstName === "admin") {
+      navigate("/dashboard");
+    }
+  });
 
   const handleCreate = async () => {
     try {
