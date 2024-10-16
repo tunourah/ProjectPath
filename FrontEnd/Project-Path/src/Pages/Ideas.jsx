@@ -85,14 +85,14 @@ function Ideas() {
         </div>
   
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-6">
-          {currentCards.map((card, index) => (
-            <Card
-              key={index}
-              title={card.title}
-              date={card.date}
-              description={card.description}
-            />
-          ))}
+        {currentCards.map((card, index) => (
+  <Card
+    key={index}
+    title={card.title}
+    date={card.ideaStatus}
+    description={card.ideaDescription} // Adjusted property name
+  />
+))}
         </div>
   
         <div className="join w-32">
