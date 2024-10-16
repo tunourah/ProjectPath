@@ -5,10 +5,37 @@ const ProjectForm = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  const handleCreate = () => {
-    document.getElementById("my_modal_1").showModal();
-    console.log("Project created:", { title, type, description });
+  const handleCreate = async () => {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+
+    try {
+      const response = await fetch("http://localhost:8000/addIdea", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          ideaType: type,
+          ideaDescription: description,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Clear the form after a successful submission
+      setTitle("");
+      setType("");
+      setDescription("");
+      setSuccess(true);
+    } catch (error) {
+      console.error("Failed to create idea:", error);
+      setSuccess(false);
+    }
   };
 
   return (
@@ -85,7 +112,7 @@ const ProjectForm = () => {
                     <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
                   </svg>
                 </div>
-                <p className="py-4">Idea Successfully sent!</p>
+                <p className="py-4">{success ? "Idea Successfully sent!" : "Failed to send idea."}</p>
                 <div className="modal-action flex justify-center border-2">
                   <form method="dialog">
                     <button className="btn bg-[#0AC6F2] text-white">OK</button>
