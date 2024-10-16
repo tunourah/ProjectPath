@@ -1,4 +1,5 @@
 import React from "react";
+import React, { useEffect } from "react";
 import Nav from "../Component/Nav";
 
 import Deletestd from "../Component/Deletestd";
@@ -9,13 +10,13 @@ const TableStd = () => {
 
   const userData = JSON.parse(localStorage.getItem("user"));
 
-  if (!userData) {
-    navigate("/signup");
-  }
-
-  if (userData.firstName !== "admin") {
-    navigate("/dashboardstd");
-  }
+  useEffect(() => {
+    if (!userData) {
+      navigate("/signup");
+    } else if (userData.firstName !== "admin") {
+      navigate("/dashboardstd");
+    }
+  });
   return (
     <div className="flex flex-col md:flex-row">
       <Nav />

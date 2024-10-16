@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "../Component/Nav";
 import { useNavigate } from "react-router-dom";
 
@@ -11,13 +11,14 @@ const ProjectForm = () => {
   const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("user"));
-  if (!userData) {
-    navigate("/signup");
-  }
 
-  if (userData.firstName === "admin") {
-    navigate("/dashboard");
-  }
+  useEffect(() => {
+    if (!userData) {
+      navigate("/signup");
+    } else if (userData.firstName === "admin") {
+      navigate("/dashboard");
+    }
+  });
 
   const handleCreate = async () => {
     try {

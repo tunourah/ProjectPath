@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Nav from "../Component/Nav";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ title, date, description }) => (
   <div className="card border rounded-xl shadow-md p-6 transform transition-transform duration-300 ease-in-out hover:scale-105 hover:bg-blue-100">
@@ -27,6 +28,18 @@ function Ideas() {
   const [cardsData, setCardsData] = useState([]); // State to hold fetched data
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 4;
+
+  const navigate = useNavigate();
+
+  const userData = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (!userData) {
+      navigate("/signup");
+    } else if (userData.firstName === "admin") {
+      navigate("/dashboard");
+    }
+  });
 
   useEffect(() => {
     const fetchIdeas = async () => {

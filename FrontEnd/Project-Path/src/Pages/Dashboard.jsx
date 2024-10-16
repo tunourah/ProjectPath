@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import Nav from "../Component/Nav";
 import StudentCard from "../Component/StudentCard";
+import { useEffect } from "react";
 function Dashboard() {
   const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("user"));
 
-  if (!userData) {
-    navigate("/signup");
-  }
-
-  if (userData.firstName !== "admin") {
-    navigate("/dashboardstd");
-  }
+  useEffect(() => {
+    if (!userData) {
+      navigate("/signup");
+    } else if (userData.firstName !== "admin") {
+      navigate("/dashboardstd");
+    }
+  });
   return (
     <>
       <section className="w-full flex ">
