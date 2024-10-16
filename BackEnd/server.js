@@ -169,14 +169,12 @@ app.post("/addIdea", authenticateToken, async (req, res) =>{
   }
   
   const idea = new Idea({
-    name:req.body.name,
-    author:user._id,
-    num_of_cop:req.body.num_of_cop,
-    dat_of_pub:req.body.dat_of_pub, 
-    isDeg:req.body.isDeg,
-    price:req.body.price,
-    langs:req.body.langs,
-    genre:req.body.genre
+    title:req.body.title,
+ student: User._id,
+  ideaFeedback:req.body.ideaFeedback,
+  ideaType:req.body.ideaType,
+  ideaStatus:req.body.ideaStatus,
+  ideaDescription:req.body.ideaDescription
    });
   
   await idea.save(); // تأكد من أن المقالة تم حفظها
@@ -185,9 +183,9 @@ app.post("/addIdea", authenticateToken, async (req, res) =>{
   
   // إضافة معرف المقالة إلى مدونات المستخدم
   
-  user.books.push(book._id);
+  user.ideas.push(idea._id);
   
-  console.log('User blogs before saving:', user.books); // تحقق من المدونات قبل الحفظ
+  console.log('User ideas before saving:', user.ideas); // تحقق من المدونات قبل الحفظ
   
   await user.save(); // تأكد من الانتظار هنا أيضًا
   
@@ -195,9 +193,9 @@ app.post("/addIdea", authenticateToken, async (req, res) =>{
   
   res.status(201).json({
   
-  message: 'book created successfully',
+  message: 'idea created successfully',
   
-  book: book
+  idea: idea
   
   });
   
@@ -205,18 +203,24 @@ app.post("/addIdea", authenticateToken, async (req, res) =>{
   
   console.error(error); // طباعة الخطأ في حال حدوثه
   
-  res.status(500).json({ message: 'Error creating article', error });
+  res.status(500).json({ message: 'Error creating idea', error });
   
   }
   
   })
 
- 
+//   {
+//     "title":"project of tuwaiq",
+//   "ideaFeedback":"",
+//   "ideaType":"",
+//   "ideaStatus":"Pending",
+//   "ideaDescription":"we still don't know"
+// }
   app.get('/user/:id', async (req, res) => {
 
       try {
       
-      const user = await User.findById(req.params.id).populate('books'); // استخدم populate هنا
+      const user = await User.findById(req.params.id).populate('ideas'); // استخدم populate هنا
       
       if (!user) {
       
@@ -237,7 +241,7 @@ app.post("/addIdea", authenticateToken, async (req, res) =>{
       })
 main().catch(err => console.log(err));
 async function main() { 
-    await mongoose.connect("mongodb+srv://Mada:Mada123456@blog.mqytf.mongodb.net/");
+    await mongoose.connect(process.env.MONGODB_URI);
   console.log("----------------////////////")
     // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
   }

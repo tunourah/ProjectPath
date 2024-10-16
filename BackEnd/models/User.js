@@ -6,6 +6,13 @@ const userSchema = new Schema({
   secondName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  ideas:[{
+
+    type: mongoose.Schema.Types.ObjectId,
+    
+    ref: 'Idea'
+    
+    }]
 });
 
 const User = mongoose.model('User', userSchema);
