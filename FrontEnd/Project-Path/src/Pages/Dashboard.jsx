@@ -19,8 +19,12 @@ function Dashboard() {
       <section className="w-full flex ">
         <Nav />
         <section className="p-8 md:w-4/5 xs:w-full">
-          <h2 className="font-bold text-2xl p-5">UserName</h2>
-          <div className="flex justify-around flex-wrap gap-2 ">
+          <h2 className="text-2xl p-5">
+            {" "}
+            <span className="font-bold text-4xl">Welcome</span>{" "}
+            {userData.firstName} {userData.secondName}
+          </h2>
+          <div className="flex flex-wrap gap-8">
             <StudentCard
               descrptn={""}
               title={"Projects"}

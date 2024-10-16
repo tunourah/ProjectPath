@@ -145,58 +145,63 @@ const Deletestd = ({ headers }) => {
   return (
     <div className="p-5 m-5 max-w-full">
       <ToastContainer /> {/* Toast container to display notifications */}
-      <div className="relative px-2 overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex items-center justify-between flex-col md:flex-row flex-wrap space-y-4 md:space-y-0 py-6 px-4 bg-white dark:bg-gray-900">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            All Projects
-          </h2>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <label htmlFor="table-search" className="sr-only">
-              Search
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                id="table-search-users"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full sm:w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search "
-              />
-            </div>
-            <div className="relative inline-block">
-              <button
-                id="dropdownActionButton"
-                onClick={toggleDropdown}
-                className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                type="button"
+      <div className="flex items-center justify-between flex-col md:flex-row flex-wrap space-y-4 md:space-y-0 py-6 px-4 bg-white">
+        <div className="flex items-center gap-4">
+          <img
+            src="https://i.ibb.co/rZN4dHG/student-1.png"
+            alt=""
+            srcset=""
+            className="w-[48px]"
+          />
+          <h2 className="text-lg font-semibold text-gray-900">All Students</h2>
+        </div>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <label htmlFor="table-search" className="sr-only">
+            Search
+          </label>
+          <div className="relative">
+            <input
+              type="text"
+              id="table-search-users"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="input input-bordered focus-within:outline-none"
+              placeholder="Search "
+            />
+          </div>
+          <div className="relative inline-block">
+            <button
+              id="dropdownActionButton"
+              onClick={toggleDropdown}
+              className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none focus-within:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5"
+              type="button"
+            >
+              <span className="sr-only">Action button</span>
+              Sort by
+              <svg
+                className="w-2.5 h-2.5 ml-2.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
               >
-                <span className="sr-only">Action button</span>
-                Sort by
-                <svg
-                  className="w-2.5 h-2.5 ml-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
           </div>
         </div>
-
+      </div>
+      <div className="relative px-2 overflow-x-auto shadow-md sm:rounded-lg">
         {/* Responsive table */}
         <div className="overflow-x-auto m-2 p-2">
-          <table className="w-full hidden sm:inline-table text-sm text-left text-gray-500 dark:text-gray-400 border rounded-lg">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full hidden sm:inline-table text-sm text-left text-gray-500 border rounded-lg">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 {headers.map((header, index) => (
                   <th key={index} scope="col" className="px-6 py-3">
@@ -212,7 +217,7 @@ const Deletestd = ({ headers }) => {
               {currentProjects.map((project, index) => (
                 <tr
                   key={index}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                  className="bg-white border-b hover:bg-gray-50"
                 >
                   {headers.includes("Student Name") && (
                     <td className="px-6 py-4">{project.studentName}</td>
@@ -227,10 +232,7 @@ const Deletestd = ({ headers }) => {
                   )}
                   {headers.includes("Status") && (
                     <td className="px-6 py-4">
-                      <div className="flex items-center">
-                 
-                        {project.status}
-                      </div>
+                      <div className="flex items-center">{project.status}</div>
                     </td>
                   )}
                   <td className="px-6 py-4 text-right">
@@ -238,7 +240,7 @@ const Deletestd = ({ headers }) => {
                       <button
                         key={actionIndex}
                         onClick={() => action.handler(project)}
-                        className={`ml-2 ${action.className}`}  
+                        className={`ml-2 ${action.className}`}
                       >
                         {action.label}
                       </button>
@@ -305,7 +307,7 @@ const Deletestd = ({ headers }) => {
               maxWidth: "500px", // Added max-width
               height: "300px",
               top: "50%",
-              left: "50%",
+              left: "60%",
               right: "auto",
               bottom: "auto",
               marginRight: "-50%",
@@ -405,14 +407,11 @@ const Deletestd = ({ headers }) => {
               {/* Action Buttons (Accept, Reject, Edit) */}
               <div className="mt-4 flex flex-col space-y-2">
                 {actions.map((action, actionIndex) => {
-                 
-
                   return (
                     <button
                       key={actionIndex}
                       onClick={() => action.handler(project)}
                       className={`w-full px-4 py-2 rounded-md transition-colors duration-200 `}
-               
                     >
                       {action.label}
                     </button>

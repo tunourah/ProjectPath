@@ -18,10 +18,12 @@ const TableStd = () => {
   });
   return (
     <div className="flex flex-col md:flex-row">
-      <Nav />
-      <main className="flex justify-center items-center w-full p-8">
+      <Nav className="w-1/4 bg-gray-800 text-white p-6" />
+      <main className="flex-1 container mx-auto p-6">
         <div className="w-full max-w-5xl">
-          <Deletestd headers={["Student Name"]} />
+          <div className="w-full">
+            <Deletestd headers={["Student Name"]} />
+          </div>
         </div>
       </main>
     </div>

@@ -1,8 +1,12 @@
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import NavbarLogo from "../assets/Navbar-logo.png";
+
 function Nav() {
   const navigate = useNavigate();
+
+  const userData = JSON.parse(localStorage.getItem("user"));
 
   function hide() {
     document.querySelector("nav").style.right = "100%";
@@ -35,17 +39,26 @@ function Nav() {
           onClick={hide}
           alt="Close"
         />
-        <ul className="text-[#6d6d6d]">
-          <li className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-black p-3 hover:bg-[#f0f0f0] transition duration-200">
-            project<span className="text-[#26dec6] mr-2">path </span>
-            <img className="w-10 h-10 pl-1" src={Logo} alt="LOGO" />
+        {/* for admin */}
+        <ul
+          className={
+            userData.firstName !== "admin" ? "hidden" : "text-[#6d6d6d]"
+          }
+        >
+          <li className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-black p-3 transition duration-200">
+            <Link to="/dashboard">
+              <img
+                src={NavbarLogo}
+                className="h-[50px] object-cover rounded-full"
+              />
+            </Link>
           </li>
           <Link to="/dashboard">
-            <li className="p-3 flex items-center hover:bg-[#f0f0f0] transition duration-200">
+            <li className="p-6 flex items-center hover:bg-[#f0f0f0] transition duration-200">
               <img
                 src="https://i.ibb.co/W073rqm/four-squares-button-of-view-options.png"
                 alt=""
-                className="w-3 mr-3"
+                className="w-8 mr-3"
               />
               Dashboard
             </li>
@@ -53,9 +66,9 @@ function Nav() {
           <Link to="/tablestd">
             <li className="p-3 flex items-center hover:bg-[#f0f0f0] transition duration-200">
               <img
-                src="https://i.ibb.co/W073rqm/four-squares-button-of-view-options.png"
+                src="https://i.ibb.co/rZN4dHG/student-1.png"
                 alt=""
-                className="w-3 mr-3"
+                className="w-12 mr-3"
               />
               Students
             </li>
@@ -63,11 +76,67 @@ function Nav() {
           <Link to="/tableproject">
             <li className="p-3 flex items-center hover:bg-[#f0f0f0] transition duration-200">
               <img
-                src="https://i.ibb.co/W073rqm/four-squares-button-of-view-options.png"
+                src="https://i.ibb.co/sF0S9qt/project.png"
                 alt=""
-                className="w-3 mr-3"
+                className="w-12 mr-3"
               />
               Projects
+            </li>
+          </Link>
+        </ul>
+
+        {/* for student */}
+        <ul
+          className={
+            userData.firstName !== "admin" ? "text-[#6d6d6d]" : "hidden"
+          }
+        >
+          <li className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-black p-3 transition duration-200">
+            <Link to="/dashboardstd">
+              <img
+                src={NavbarLogo}
+                className="h-[50px] object-cover rounded-full"
+              />
+            </Link>
+          </li>
+          <Link to="/dashboardstd">
+            <li className="p-6 flex items-center hover:bg-[#f0f0f0] transition duration-200">
+              <img
+                src="https://i.ibb.co/W073rqm/four-squares-button-of-view-options.png"
+                alt=""
+                className="w-8 mr-3"
+              />
+              Dashboard
+            </li>
+          </Link>
+          <Link to="/ideas">
+            <li className="p-3 flex items-center hover:bg-[#f0f0f0] transition duration-200">
+              <img
+                src="https://i.ibb.co/RDg2W4h/star.png"
+                alt=""
+                className="w-12 mr-3"
+              />
+              All Ideas
+            </li>
+          </Link>
+          <Link to="/tablestate">
+            <li className="p-3 flex items-center hover:bg-[#f0f0f0] transition duration-200">
+              <img
+                src="https://i.ibb.co/W6s9QWG/state-1.png"
+                alt=""
+                className="mr-3 w-12"
+              />
+              My Projects
+            </li>
+          </Link>
+          <Link to="/addideas">
+            <li className="p-3 flex items-center hover:bg-[#f0f0f0] transition duration-200">
+              <img
+                src="https://i.ibb.co/Dz8g0cp/add.png"
+                alt=""
+                className="w-12 mr-3"
+              />
+              Add Idea
             </li>
           </Link>
         </ul>

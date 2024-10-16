@@ -8,6 +8,9 @@ const ProjectForm = () => {
   const [description, setDescription] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorBorder, setErrorBorder] = useState("");
+
   const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("user"));
@@ -21,6 +24,11 @@ const ProjectForm = () => {
   });
 
   const handleCreate = async () => {
+    if (title === "" || type === "" || description === "") {
+      errorLog("Please fill in all fields!");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:8000/addIdea", {
         method: "POST",
@@ -49,25 +57,33 @@ const ProjectForm = () => {
     }
   };
 
+  const errorLog = (message) => {
+    setErrorMessage(message);
+    setErrorBorder("border-[#FF6565]");
+  };
+
   return (
     <div className="flex h-screen">
       <Nav className="w-1/4 bg-gray-800 text-white p-6" />
 
-      <div className="flex-1 p-6 bg-base-100 rounded-lg shadow-lg mx-8 mt-16">
-        <div className="text-xl font-semibold mb-4 flex">
-          <span className="mx-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#0AC6F2"
-            >
-              <path d="M440-240h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
-            </svg>
-          </span>
-          <span>Add Project</span>
+      <div className="flex-1 container mx-auto p-6">
+        <div className="text-start">
+          <div className="text-4xl font-bold mb-4 flex">
+            <span className="mx-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="48px"
+                viewBox="0 -960 960 960"
+                width="48px"
+                fill="#0AC6F2"
+              >
+                <path d="M440-240h80v-120h120v-80H520v-120h-80v120H320v80h120v120ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
+              </svg>
+            </span>
+            <span>Add Project</span>
+          </div>
         </div>
+        <p className="text-[#FF6565] text-sm text-start mb-2">{errorMessage}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
           <div className="form-control">
             <label className="label">
@@ -76,7 +92,7 @@ const ProjectForm = () => {
             <input
               type="text"
               placeholder="Project Name"
-              className="input input-bordered"
+              className={`${errorBorder} input input-bordered focus-within:outline-none`}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -88,18 +104,18 @@ const ProjectForm = () => {
             <input
               type="text"
               placeholder="Type"
-              className="input input-bordered"
+              className={`${errorBorder} input input-bordered focus-within:outline-none`}
               value={type}
               onChange={(e) => setType(e.target.value)}
             />
           </div>
         </div>
-        <div className="form-control w-full relative">
+        <div className="form-control w-full relative h-3/4">
           <label className="label">
             <span className="label-text">Project Description</span>
           </label>
           <textarea
-            className="textarea textarea-bordered h-48 w-full resize-none pr-24"
+            className={`${errorBorder} textarea textarea-bordered h-full w-full resize-none pr-24 focus-within:outline-none`}
             placeholder="Describe your project..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -114,7 +130,7 @@ const ProjectForm = () => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24px"
-                  viewBox="http://www.w3.org/2000/svg"
+                  viewBox="0 -960 960 960"
                   width="24px"
                   fill="#ffffff"
                 >
@@ -140,7 +156,9 @@ const ProjectForm = () => {
                 </p>
                 <div className="modal-action flex justify-center border-2">
                   <form method="dialog">
-                    <button className="btn bg-[#0AC6F2] text-white">OK</button>
+                    <button className="btn bg-white hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] px-8 hover:text-white">
+                      OK
+                    </button>
                   </form>
                 </div>
               </div>
