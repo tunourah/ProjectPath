@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "../Component/Nav";
 import Table from "../Component/Table";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,13 @@ const Tableproject = () => {
   const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("user"));
-  if (!userData) {
-    navigate("/signup");
-  }
+  useEffect(() => {
+    if (!userData) {
+      navigate("/signup");
+    } else if (userData.firstName !== "admin") {
+      navigate("/dashboardstd");
+    }
+  });
 
   return (
     <div className="flex flex-col md:flex-row">

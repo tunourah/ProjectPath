@@ -3,9 +3,12 @@ import { HashLink as Link } from "react-router-hash-link";
 import NavbarLogo from "../assets/Navbar-logo.png";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [hidden, setHidden] = useState("hidden"); // state for mobile header
+
+  const userData = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>
@@ -44,7 +47,11 @@ function Header() {
         </div>
 
         {/* hidden when user signup */}
-        <div className="font-bold text-base lg:block hidden">
+        <div
+          className={
+            userData ? `hidden` : "font-bold text-base lg:block hidden"
+          }
+        >
           <Link
             to="/signup"
             className="border border-black px-8 py-2 rounded-full hover:bg-[#25DEC5] hover:border-[#25DEC5] flex items-center hover:text-[#002933]"
@@ -54,19 +61,23 @@ function Header() {
         </div>
 
         {/* show when user signup */}
-        <div className="font-bold text-base lg:block hidden">
+        <div
+          className={
+            userData ? `font-bold text-base lg:block hidden` : "hidden"
+          }
+        >
           <Link
-            to="/"
+            to="/dashboard"
             className="border border-black px-8 py-2 rounded-full hover:bg-[#25DEC5] hover:border-[#25DEC5] flex items-center hover:text-[#002933]"
           >
-            Home
+            DashBoard
           </Link>
         </div>
 
         {/* mobile header */}
         <div className="block lg:hidden">
           <div
-            className="text-2xl block lg:hidden"
+            className="text-2xl block lg:hidden cursor-pointer"
             onClick={() => {
               setHidden("");
             }}
@@ -89,7 +100,7 @@ function Header() {
                 </div>
 
                 <div
-                  className="text-4xl"
+                  className="text-4xl cursor-pointer"
                   onClick={() => {
                     setHidden("hidden");
                   }}
@@ -135,7 +146,7 @@ function Header() {
                 </div>
 
                 {/* hidden when user signup */}
-                <div className="font-bold text-base">
+                <div className={userData ? `hidden` : "font-bold text-base"}>
                   <Link
                     to="/signup"
                     className="border border-black px-8 py-2 rounded-full hover:bg-[#25DEC5] hover:border-[#25DEC5] flex items-center hover:text-[#002933]"
@@ -145,12 +156,12 @@ function Header() {
                 </div>
 
                 {/* show when user signup */}
-                <div className="font-bold text-base">
+                <div className={userData ? `font-bold text-base` : "hidden"}>
                   <Link
-                    to="/"
+                    to="/dashboard"
                     className="border border-black px-8 py-2 rounded-full hover:bg-[#25DEC5] hover:border-[#25DEC5] flex items-center hover:text-[#002933]"
                   >
-                    Home
+                    DashBoard
                   </Link>
                 </div>
               </div>

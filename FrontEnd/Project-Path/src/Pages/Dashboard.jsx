@@ -25,7 +25,7 @@ function Dashboard() {
               descrptn={""}
               title={"Projects"}
               img={"https://i.ibb.co/sF0S9qt/project.png"}
-              link={"/tablestd"}
+              link={"/tableproject"}
             />
 
             <StudentCard
