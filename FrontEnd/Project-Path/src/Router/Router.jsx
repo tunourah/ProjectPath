@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Dashboard from '../Pages/Dashboard';
+import Dashboard from "../Pages/Dashboard";
 import Login from "../Pages/Login";
 import Signup from "../Pages/Signup";
 import ErrorPage from "../Pages/ErrorPage";
-import AddIdeas from "../Pages/AddIdeas";  
+import AddIdeas from "../Pages/Addideas";
 import Ideas from "../Pages/Ideas";
 import DashboardStd from "../Pages/DashboardStd";
-import TableProject from "../Pages/Tableproject";  
+import TableProject from "../Pages/Tableproject";
 import TableStd from "../Pages/TableStd";
 import TableState from "../Pages/TableState";
 
@@ -26,11 +26,11 @@ const Router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: "/ideas",  
+    path: "/ideas",
     element: <Ideas />,
   },
   {
-    path: "/addideas", 
+    path: "/addideas",
     element: <AddIdeas />,
   },
   {
@@ -48,15 +48,15 @@ const Router = createBrowserRouter([
   {
     path: "/tablestd",
     element: <TableStd />,
-  }, 
-   {
+  },
+  {
     path: "/tablestate",
     element: <TableState />,
-   },
+  },
   {
-    path: "*", 
+    path: "*",
     element: <ErrorPage />,
-  }
+  },
 ]);
 
 export default Router;
