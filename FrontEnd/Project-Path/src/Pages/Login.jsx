@@ -55,7 +55,13 @@ function Login() {
     setEmail("");
     setPassword("");
 
-    navigate("/dashboard");
+    if (user.firstName !== "admin") {
+      navigate("/dashboardstd");
+    }
+
+    if (user.firstName === "admin") {
+      navigate("/dashboard");
+    }
   };
 
   const errorLog = (message) => {

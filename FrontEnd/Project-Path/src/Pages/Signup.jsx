@@ -13,7 +13,6 @@ function Signup() {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorBorder, setErrorBorder] = useState("");
 
-  const [signData, setSignData] = useState([]);
   const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
@@ -92,7 +91,7 @@ function Signup() {
         setEmail("");
         setPassword("");
 
-        navigate("/dashboard");
+        navigate("/dashboardstd");
       })
       .catch(function (error) {
         console.log(error);
