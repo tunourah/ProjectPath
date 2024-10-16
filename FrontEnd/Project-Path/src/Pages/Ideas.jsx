@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "../Component/Nav";
 
 const Card = ({ title, date, description }) => (
@@ -24,36 +24,26 @@ const Card = ({ title, date, description }) => (
 );
 
 function Ideas() {
-  const cardsData = [
-    {
-      title: "Adoddle",
-      date: "05 April 2023",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita recusandae odio ea veniam quas debitis quis tenetur reiciendis laboriosam, sapiente aspernatur fuga corrupti delectus, culpa ipsam voluptatibus veritatis incidunt sequi.",
-    },
-    {
-      title: "Adoddle",
-      date: "05 April 2023",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita recusandae odio ea veniam quas debitis quis tenetur reiciendis laboriosam, sapiente aspernatur fuga corrupti delectus, culpa ipsam voluptatibus veritatis incidunt sequi.",
-    },
-    {
-      title: "Adoddle",
-      date: "05 April 2023",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita recusandae odio ea veniam quas debitis quis tenetur reiciendis laboriosam, sapiente aspernatur fuga corrupti delectus, culpa ipsam voluptatibus veritatis incidunt sequi.",
-    },
-    {
-      title: "Adoddle",
-      date: "05 April 2023",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita recusandae odio ea veniam quas debitis quis tenetur reiciendis laboriosam, sapiente aspernatur fuga corrupti delectus, culpa ipsam voluptatibus veritatis incidunt sequi.",
-    },
-    { title: "Additional Card", date: "06 April 2023", description: "lorem" },
-  ];
-
+  const [cardsData, setCardsData] = useState([]); // State to hold fetched data
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 4;
+
+  useEffect(() => {
+    const fetchIdeas = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/ideas");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setCardsData(data); // Set the fetched data to state
+      } catch (error) {
+        console.error("Failed to fetch ideas:", error);
+      }
+    };
+
+    fetchIdeas();
+  }, []); // Empty dependency array means this effect runs once on mount
 
   const currentCards = cardsData.slice(
     currentPage * itemsPerPage,
@@ -73,56 +63,56 @@ function Ideas() {
 
   return (
     <div>
-      <div className="flex h-screen">
-        <Nav className="w-1/4 bg-gray-800 text-white p-6" />
-
-        <div className="flex-1 container mx-auto p-6">
-          <div className="text-start">
-            <div className="text-4xl font-bold mt-2 flex">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="48px"
-                  viewBox="0 -960 960 960"
-                  width="48px"
-                  fill="#0AC6F2"
-                >
-                  <path d="M480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-200v-80h320v80H320Zm10-120q-69-41-109.5-110T180-580q0-125 87.5-212.5T480-880q125 0 212.5 87.5T780-580q0 81-40.5 150T630-320H330Zm24-80h252q45-32 69.5-79T700-580q0-92-64-156t-156-64q-92 0-156 64t-64 156q0 54 24.5 101t69.5 79Zm126 0Z" />
-                </svg>
-              </span>
-              <span>Idea</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-6">
-            {currentCards.map((card, index) => (
-              <Card
-                key={index}
-                title={card.title}
-                date={card.date}
-                description={card.description}
-              />
-            ))}
-          </div>
-
-          <div className="join w-32">
-            <button
-              onClick={handlePreviousPage}
-              disabled={!hasPreviousPage}
-              className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] hover:border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe] hover:opacity-60"
-            >
-              Previous page
-            </button>
-            <button
-              onClick={handleNextPage}
-              disabled={!hasNextPage}
-              className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] hover:border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe] hover:opacity-60"
-            >
-              Next
-            </button>
+    <div className="flex h-screen">
+      <Nav className="w-1/4 bg-gray-800 text-white p-6" />
+  
+      <div className="flex-1 container mx-auto p-6">
+        <div className="text-start">
+          <div className="text-4xl font-bold mt-2 flex">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="48px"
+                viewBox="0 -960 960 960"
+                width="48px"
+                fill="#0AC6F2"
+              >
+                <path d="M480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-200v-80h320v80H320Zm10-120q-69-41-109.5-110T180-580q0-125 87.5-212.5T480-880q125 0 212.5 87.5T780-580q0 81-40.5 150T630-320H330Zm24-80h252q45-32 69.5-79T700-580q0-92-64-156t-156-64q-92 0-156 64t-64 156q0 54 24.5 101t69.5 79Zm126 0Z" />
+              </svg>
+            </span>
+            <span>Idea</span>
           </div>
         </div>
+  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-6">
+        {currentCards.map((card, index) => (
+  <Card
+    key={index}
+    title={card.title}
+    date={card.ideaStatus}
+    description={card.ideaDescription} // Adjusted property name
+  />
+))}
+        </div>
+  
+        <div className="join w-32">
+          <button
+            onClick={handlePreviousPage}
+            disabled={!hasPreviousPage}
+            className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe] hover:opacity-60"
+          >
+            Previous page
+          </button>
+          <button
+            onClick={handleNextPage}
+            disabled={!hasNextPage}
+            className="join-item btn btn-outline text-xs hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] bg-[#fefefe] hover:opacity-60"
+          >
+            Next
+          </button>
+        </div>
       </div>
+    </div>
     </div>
   );
 }

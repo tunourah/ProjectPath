@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
+import { body, validationResult }from 'express-validator';
 dotenv.config();
 
 const app = express();
@@ -69,8 +70,19 @@ next();
 });
 
 }
-
-app.post('/signup', async (req, res) => {
+function isEmailFromDomain(email) {
+  const emailDomain = email.split('@')[1];
+  return emailDomain === "Tuwaiq.com";
+}
+app.post('/signup', [body('firstName').isLength({ min: 3 }),
+  body('firstName').isLength({ min: 3 }),
+  body('email').isEmail(),
+  body('password').isLength({ min: 5 })
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()&&!isEmailFromDomain(email)) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
     const {  
       firstName,
@@ -150,13 +162,14 @@ app.post('/signup', async (req, res) => {
       })
   
 
-app.get("/addIdea",(req,res)=>{
+app.get("/ideas",(req,res)=>{
  Idea.find().then(result=>{
   res.send(result)
  })
 })
 
-app.post("/addIdea", authenticateToken, async (req, res) =>{
+app.post("/addIdea",[    body("title").isLength({ min: 3 }),
+  body("ideaDescription").isLength({ min: 3 })], authenticateToken, async (req, res) =>{
 
   try {
   
