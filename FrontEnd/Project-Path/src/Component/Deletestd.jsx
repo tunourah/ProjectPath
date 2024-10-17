@@ -150,7 +150,7 @@ const Deletestd = ({ headers }) => {
           <img
             src="https://i.ibb.co/rZN4dHG/student-1.png"
             alt=""
-            srcset=""
+            srcSet=""
             className="w-[48px]"
           />
           <h2 className="text-lg font-semibold text-gray-900">All Students</h2>

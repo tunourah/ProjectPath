@@ -136,7 +136,7 @@ const TableStd = ({ headers }) => {
           <img
             src="https://i.ibb.co/W6s9QWG/state-1.png"
             alt=""
-            srcset=""
+            srcSet=""
             className="w-[48px]"
           />
           <h2 className="text-lg font-semibold text-gray-900">My Projects</h2>

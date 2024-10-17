@@ -155,7 +155,7 @@ const Table = ({ headers }) => {
           <img
             src="https://i.ibb.co/sF0S9qt/project.png"
             alt=""
-            srcset=""
+            srcSet=""
             className="w-[48px]"
           />
           <h2 className="text-lg font-semibold text-gray-900">All Projects</h2>
