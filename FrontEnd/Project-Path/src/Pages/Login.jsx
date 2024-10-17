@@ -82,38 +82,10 @@ function Login() {
     //   })
     // );
 
-    app.get("/students",(req,res)=>{
-      User.find({isAdmin:false}).then(result=>{
-       res.send(result)
-      }).catch(error => {
-        console.error('Error fetching students:', error);
-        res.status(500).json({ message: 'Internal Server Error' }); // Handle errors
-      });
-     })
-    
-     app.delete("/students/:id", (req, res) => {
-      const { id } = req.params;
-    
-      User.findByIdAndDelete(id)
-          .then(result => {
-              if (!result) {
-                  return res.status(404).send({ message: 'User not found' });
-              }
-              res.send({ message: 'User deleted successfully', user: result });
-          })
-          .catch(error => {
-              console.error('Error deleting user:', error);
-              res.status(500).send({ message: 'Server error' });
-          });
-    });
-    
-    
-     app.patch("/ideas/:id",(req,res)=>{
-      const {id}=req.params
-      Idea.findByIdAndUpdate(id,{$set:{ideaStatus:req.body.ideaStatus}},{new:true,runValidators:true}).then(result=>{
-         res.send(result)
-     })
-    })
+ 
+ 
+
+
  
 
   const errorLog = (message) => {
