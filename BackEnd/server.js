@@ -170,6 +170,33 @@ app.get("/ideas",(req,res)=>{
  })
 })
 
+
+ app.get("/students",(req,res)=>{
+   User.find({isAdmin:false}).then(result=>{
+    res.send(result)
+   }).catch(error => {
+     console.error('Error fetching students:', error);
+     res.status(500).json({ message: 'Internal Server Error' }); // Handle errors
+   });
+  })
+ 
+  app.delete("/students/:id", (req, res) => {
+   const { id } = req.params;
+ 
+   User.findByIdAndDelete(id)
+       .then(result => {
+           if (!result) {
+               return res.status(404).send({ message: 'User not found' });
+           }
+           res.send({ message: 'User deleted successfully', user: result });
+       })
+       .catch(error => {
+           console.error('Error deleting user:', error);
+           res.status(500).send({ message: 'Server error' });
+       });
+ });
+ 
+
 app.post("/addIdea",[    body("title").isLength({ min: 3 }),
   body("ideaDescription").isLength({ min: 3 })], authenticateToken, async (req, res) =>{
 
@@ -254,6 +281,13 @@ app.post("/addIdea",[    body("title").isLength({ min: 3 }),
       }
       
       })
+      app.patch("/ideas/:id",(req,res)=>{
+        const {id}=req.params
+        Idea.findByIdAndUpdate(id,{$set:{ideaStatus:req.body.ideaStatus},$set:{ideaFeedback:req.body.ideaFeedback}},{new:true,runValidators:true}).then(result=>{
+           res.send(result)
+       })
+      })
+
 main().catch(err => console.log(err));
 async function main() { 
     await mongoose.connect(process.env.MONGODB_URI);
