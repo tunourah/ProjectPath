@@ -12,9 +12,7 @@ const TableStd = () => {
   useEffect(() => {
     if (!userData) {
       navigate("/signup");
-    } else if (userData.firstName !== "admin") {
-      navigate("/dashboardstd");
-    }
+    } 
   });
   return (
     <div className="flex flex-col md:flex-row">

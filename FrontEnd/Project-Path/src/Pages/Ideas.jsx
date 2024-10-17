@@ -36,9 +36,7 @@ function Ideas() {
   useEffect(() => {
     if (!userData) {
       navigate("/signup");
-    } else if (userData.firstName === "admin") {
-      navigate("/dashboard");
-    }
+    } 
   });
 
   useEffect(() => {

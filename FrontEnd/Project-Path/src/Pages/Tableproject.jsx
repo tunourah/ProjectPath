@@ -10,9 +10,7 @@ const Tableproject = () => {
   useEffect(() => {
     if (!userData) {
       navigate("/signup");
-    } else if (userData.firstName !== "admin") {
-      navigate("/dashboardstd");
-    }
+    } 
   });
 
   return (

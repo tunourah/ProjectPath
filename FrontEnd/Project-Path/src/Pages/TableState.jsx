@@ -11,9 +11,7 @@ const TableState = () => {
   useEffect(() => {
     if (!userData) {
       navigate("/signup");
-    } else if (userData.firstName === "admin") {
-      navigate("/dashboard");
-    }
+    } 
   });
   return (
     <div className="flex h-screen">
