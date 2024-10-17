@@ -52,7 +52,7 @@ function isAdmin(req, res, next) {
 // Helper function to check email domain
 function isEmailFromDomain(email) {
   const emailDomain = email.split('@')[1];
-  return emailDomain === "Tuwaiq.com";
+  return emailDomain === "twaiq.edu.sa";
 }
 
 // Signup Route

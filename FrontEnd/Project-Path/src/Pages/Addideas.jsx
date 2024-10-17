@@ -70,7 +70,7 @@ const ProjectForm = () => {
     <div className="flex h-screen">
       <Nav className="w-1/4 bg-gray-800 text-white p-6" />
 
-      <div className="flex-1 container mx-auto p-6">
+      <div className="flex-1 container mx-auto p-6 xl:mt-0 mt-12">
         <div className="text-start">
           <div className="text-4xl font-bold mb-4 flex">
             <span className="mx-2">

@@ -44,7 +44,7 @@ function Ideas() {
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
-        const response = await fetch("http://localhost:8000/ideas");
+        const response = await fetch("http://localhost:3000/ideas");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -79,7 +79,7 @@ function Ideas() {
       <div className="flex h-screen">
         <Nav className="w-1/4 bg-gray-800 text-white p-6" />
 
-        <div className="flex-1 container mx-auto p-6">
+        <div className="flex-1 container mx-auto p-6 xl:mt-0 mt-12">
           <div className="text-start">
             <div className="text-4xl font-bold mt-2 flex">
               <span>

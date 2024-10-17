@@ -20,10 +20,11 @@ function DashboardStd() {
     <>
       <section className="w-full flex">
         <Nav />
-        <section className="p-8 md:w-4/5 xs:w-full">
+        <section className="p-8 md:w-4/5 xs:w-full xl:mt-0 mt-12">
           <h2 className=" text-2xl p-5">
             <span className="font-bold text-4xl">Welcome</span>{" "}
-            {userData.firstName} {userData.secondName}
+            {userData ? userData.firstName : ""}{" "}
+            {userData ? userData.secondName : ""}
           </h2>
           <div className="flex justify-around flex-wrap gap-2">
             <StudentCard

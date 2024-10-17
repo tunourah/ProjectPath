@@ -12,7 +12,7 @@ export default function StudentCard({ descrptn, img, link, title }) {
             <img
               src={img}
               alt=""
-              srcset=""
+              srcSet=""
               className="w-[61px] relative left-[35px] z-10"
             />
             <h2 className="  text-[24px] font-semibold bg-[#dff1f1] w-[300px] p-3 pl-[40px] rounded-full text-center relative right-[26px]">
