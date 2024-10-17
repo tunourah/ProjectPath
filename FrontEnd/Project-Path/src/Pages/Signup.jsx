@@ -77,15 +77,14 @@ function Signup() {
       password: password,
     })
     .then(function (response) {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          firstName: firstName,
-          secondName: secondName,
-          email: email,
-        })
-      );
-      //  console.log(response.data.user);
+      localStorage.setItem('user',  JSON.stringify({
+        firstName: response.data.user.firstName,
+        secondName: response.data.user.secondName,
+        email: response.data.user.email,
+        token:response.data.token,
+        isAdmin:response.data.user.isAdmin
+      }));
+       console.log(response.data.token);
         setFirstName("");
         setSecondName("");
         setEmail("");

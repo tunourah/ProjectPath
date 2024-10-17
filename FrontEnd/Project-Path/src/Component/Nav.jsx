@@ -40,10 +40,11 @@ function Nav() {
           alt="Close"
         />
         {/* for admin */}
+        {console.log(userData.email)}
         <ul
           className={
             userData
-              ? userData.firstName !== "admin"
+              ? userData.email!== "admin@twaiq.com"
                 ? "hidden"
                 : "text-[#6d6d6d]"
               : ""
@@ -93,7 +94,7 @@ function Nav() {
         <ul
           className={
             userData
-              ? userData.firstName !== "admin"
+              ? userData.email!== "admin@twaiq.com"
                 ? "text-[#6d6d6d]"
                 : "hidden"
               : ""
