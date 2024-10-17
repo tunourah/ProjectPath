@@ -34,6 +34,8 @@ const ProjectForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+            'Authorization':user.token , // Example of adding an auth token
+            // Add any other headers you need here
         },
         body: JSON.stringify({
           title,
