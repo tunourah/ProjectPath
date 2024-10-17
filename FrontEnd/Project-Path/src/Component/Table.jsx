@@ -39,6 +39,7 @@ const Table = ({ headers }) => {
   };
 
   const handleAccept = (project) => {
+    
     toast.success(`Project ${project.projectName} accepted successfully!`);
     setAcceptedProjects((prevAccepted) => [
       ...prevAccepted,

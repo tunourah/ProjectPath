@@ -18,8 +18,6 @@ const ProjectForm = () => {
   useEffect(() => {
     if (!userData) {
       navigate("/signup");
-    } else if (userData.firstName === "admin") {
-      navigate("/dashboard");
     }
   });
 
@@ -30,7 +28,7 @@ const ProjectForm = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/addIdea", {
+      const response = await fetch("http://localhost:3000/addIdea", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

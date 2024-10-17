@@ -58,7 +58,7 @@ function Login() {
           isAdmin:response.data.user.isAdmin
         })); // Save token to local storage
         // Redirect or update UI after successful login
-        console.log(response.data.user.isAdmin);
+        console.log(response);
         // setTimeout(() => {
           if (response.data.user.isAdmin) {
             navigate("/dashboard");
