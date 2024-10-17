@@ -72,7 +72,7 @@ next();
 }
 function isEmailFromDomain(email) {
   const emailDomain = email.split('@')[1];
-  return emailDomain === "Tuwaiq.com";
+  return emailDomain === "twaiq.edu.sa";
 }
 app.post('/signup', [body('firstName').isLength({ min: 3 }),
   body('firstName').isLength({ min: 3 }),
@@ -103,7 +103,7 @@ app.post('/signup', [body('firstName').isLength({ min: 3 }),
     const hashedPassword = await bcrypt.hash(password, 10);
     
     // إنشاء مستخدم جديد
-    
+    if(isEmailFromDomain(email)){
     const newUser = new User({
       firstName,
       secondName,
@@ -121,7 +121,9 @@ app.post('/signup', [body('firstName').isLength({ min: 3 }),
       { expiresIn: '1h' } // مدة صلاحية التوكن
       
       );
-      res.status(201).json({ message: 'User registered successfully', user: newUser, token: token });
+      res.status(201).json({ message: 'User registered successfully', user: newUser, token: token });}else{
+        return res.status(400).json({ message: 'Email Shuld be twaiq.edu.sa' });
+      }
     });
     // Middleware للتحقق من أن المستخدم مسجل الدخول
     
