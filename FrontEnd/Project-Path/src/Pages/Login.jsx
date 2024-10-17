@@ -15,54 +15,106 @@ function Login() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("https://670438ecab8a8f89273356ec.mockapi.io/testAPI")
-      .then(function (response) {
-        setUsers(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/signup")
+  //     .then(function (response) {
+  //       setUsers(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
     if (email === "" || password === "") {
       errorLog("Please fill in all fields!");
       return;
     }
 
-    const user = users.find((data) => data.email === email);
-    if (!user) {
-      errorLog("Email or password is wrong!");
-      return;
+    console.log(email,password)
+
+    // const user = users.find((data) => data.email === email);
+    // if (!user) {
+    //   errorLog("Email or password is wrong!");
+    //   return;
+    // }
+
+    // if (user.password !== password) {
+    //   errorLog("Email or password is wrong!");
+    //   return;
+    // }
+    e.preventDefault();
+    try {
+        const response = await axios.post('http://localhost:3000/login', {
+            email,
+            password,
+        });
+        localStorage.setItem('user',  JSON.stringify({
+          firstName: response.data.user.firstName,
+          secondName: response.data.user.secondName,
+          email: response.data.user.email,
+          token:response.data.token,
+          isAdmin:response.data.isAdmin
+        })); // Save token to local storage
+        // Redirect or update UI after successful login
+        setEmail("");
+        setPassword("");
+        console.log(response.data);
+    
+        if (response.data.user.isAdmin === false) {
+          navigate("/dashboardstd");
+        }
+    
+        if (response.data.user.isAdmin === true) {
+          navigate("/dashboard");
+        }
+    } catch (err) {
+        
     }
+};
+    // localStorage.setItem(
+    //   "user",
+    //   JSON.stringify({
+    //     firstName: user.firstName,
+    //     secondName: user.secondName,
+    //     email: user.email,
+    //   })
+    // );
 
-    if (user.password !== password) {
-      errorLog("Email or password is wrong!");
-      return;
-    }
-
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        firstName: user.firstName,
-        secondName: user.secondName,
-        email: user.email,
-      })
-    );
-
-    setEmail("");
-    setPassword("");
-
-    if (user.firstName !== "admin") {
-      navigate("/dashboardstd");
-    }
-
-    if (user.firstName === "admin") {
-      navigate("/dashboard");
-    }
-  };
+    app.get("/students",(req,res)=>{
+      User.find({isAdmin:false}).then(result=>{
+       res.send(result)
+      }).catch(error => {
+        console.error('Error fetching students:', error);
+        res.status(500).json({ message: 'Internal Server Error' }); // Handle errors
+      });
+     })
+    
+     app.delete("/students/:id", (req, res) => {
+      const { id } = req.params;
+    
+      User.findByIdAndDelete(id)
+          .then(result => {
+              if (!result) {
+                  return res.status(404).send({ message: 'User not found' });
+              }
+              res.send({ message: 'User deleted successfully', user: result });
+          })
+          .catch(error => {
+              console.error('Error deleting user:', error);
+              res.status(500).send({ message: 'Server error' });
+          });
+    });
+    
+    
+     app.patch("/ideas/:id",(req,res)=>{
+      const {id}=req.params
+      Idea.findByIdAndUpdate(id,{$set:{ideaStatus:req.body.ideaStatus}},{new:true,runValidators:true}).then(result=>{
+         res.send(result)
+     })
+    })
+ 
 
   const errorLog = (message) => {
     setErrorMessage(message);

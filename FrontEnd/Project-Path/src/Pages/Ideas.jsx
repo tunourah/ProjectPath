@@ -44,7 +44,7 @@ function Ideas() {
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
-        const response = await fetch("http://localhost:8000/ideas");
+        const response = await fetch("http://localhost:3000/ideas");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

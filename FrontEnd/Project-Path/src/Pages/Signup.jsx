@@ -54,7 +54,7 @@ function Signup() {
     }
 
     if (!email.includes("@twaiq.edu.sa")) {
-      errorLog("Your email must have a domain from Twaiq Academia!!");
+      errorLog("Your email must have a domain from twaiq Academia!!");
       return;
     }
 
@@ -70,7 +70,7 @@ function Signup() {
     }
 
     axios
-    .post("http://localhost:8000/signup", {
+    .post("http://localhost:3000/signup", {
       firstName: firstName,
       secondName: secondName,
       email: email,
@@ -85,12 +85,12 @@ function Signup() {
           email: email,
         })
       );
-
+      //  console.log(response.data.user);
         setFirstName("");
         setSecondName("");
         setEmail("");
         setPassword("");
-
+       
         navigate("/dashboardstd");
       })
       .catch(function (error) {
