@@ -7,12 +7,11 @@ const ProjectForm = () => {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [success, setSuccess] = useState(false);
-
   const [errorMessage, setErrorMessage] = useState("");
   const [errorBorder, setErrorBorder] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
-
   const userData = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -30,10 +29,13 @@ const ProjectForm = () => {
     }
 
     try {
+      localStorage.setItem("token" , "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MTA2NjQ2ZGZhMzRlZmZlZWZlZjI1YSIsImVtYWlsIjoiQUFBQFR1d2FpcS5jb20iLCJpYXQiOjE3MjkxMjg4MDgsImV4cCI6MTcyOTEzMjQwOH0.JSky6zE2xyViRGckHR2n4auIWiroLwm1z7gN1iz2fCA")
+      const token = localStorage.getItem("token");
       const response = await fetch("http://localhost:8000/addIdea", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `${token}`
         },
         body: JSON.stringify({
           title,
@@ -54,6 +56,8 @@ const ProjectForm = () => {
     } catch (error) {
       console.error("Failed to create idea:", error);
       setSuccess(false);
+    } finally {
+      setIsModalOpen(true); // Show the modal
     }
   };
 
@@ -138,31 +142,37 @@ const ProjectForm = () => {
                 </svg>
               </span>
             </button>
-            <dialog id="my_modal_1" className="modal">
-              <div className="modal-box text-center flex flex-col items-center">
-                <div className="mask mask-circle bg-green-500 text-white text-center p-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="48px"
-                    viewBox="http://www.w3.org/2000/svg"
-                    width="48px"
-                    fill="#ffffff"
-                  >
-                    <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
-                  </svg>
-                </div>
-                <p className="py-4">
-                  {success ? "Idea Successfully sent!" : "Failed to send idea."}
-                </p>
-                <div className="modal-action flex justify-center border-2">
-                  <form method="dialog">
-                    <button className="btn bg-white hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] px-8 hover:text-white">
+            {isModalOpen && (
+              <div className="modal" id="my_modal_1">
+                <div className="modal-box text-center flex flex-col items-center">
+                  <div className={`mask mask-circle ${success ? 'bg-green-500' : 'bg-red-500'} text-white text-center p-2`}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="48px"
+                      width="48px"
+                      fill="#ffffff"
+                    >
+                      {success ? (
+                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
+                      ) : (
+                        <path d="M448-448v-64h64v64h-64Zm0 128v-64h64v64h-64Zm0 128v-64h64v64h-64Zm0 128v-64h64v64h-64Zm0 128v-64h64v64h-64Zm0 128v-64h64v64h-64Zm0 128v-64h64v64h-64Zm0 128v-64h64v64h-64Z" />
+                      )}
+                    </svg>
+                  </div>
+                  <p className="py-4">
+                    {success ? "Idea Successfully sent!" : "Failed to send idea."}
+                  </p>
+                  <div className="modal-action flex justify-center border-2">
+                    <button
+                      onClick={() => setIsModalOpen(false)}
+                      className="btn bg-white hover:bg-[#0AC6F2] border-[#0AC6F2] text-[#0AC6F2] px-8 hover:text-white"
+                    >
                       OK
                     </button>
-                  </form>
+                  </div>
                 </div>
               </div>
-            </dialog>
+            )}
           </div>
         </div>
       </div>
