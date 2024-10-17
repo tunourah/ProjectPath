@@ -19,7 +19,7 @@ function Nav() {
   return (
     <>
       <img
-        className="md:invisible visible absolute left-4 top-4 cursor-pointer"
+        className="xl:invisible visible absolute left-4 top-4 cursor-pointer"
         src="https://i.ibb.co/172TmgX/menu.png"
         onClick={show}
         alt="Menu"
@@ -34,7 +34,7 @@ function Nav() {
         }}
       >
         <img
-          className="md:invisible visible absolute left-[85%] top-4 z-1 cursor-pointer"
+          className="xl:invisible visible absolute left-[85%] top-4 z-1 cursor-pointer"
           src="https://i.ibb.co/d0dgRNS/close.png"
           onClick={hide}
           alt="Close"
@@ -155,11 +155,11 @@ function Nav() {
             navigate("/");
           }}
         >
-          <div className="p-3 flex items-center font-bold hover:bg-[#f0f0f0] transition duration-200">
+          <div className="p-6 flex items-center font-bold hover:bg-[#f0f0f0] transition duration-200">
             <img
               src="https://i.ibb.co/mNdC4gK/logout.png"
               alt=""
-              className="w-4 mr-3"
+              className="w-8 mr-3"
             />
             Log Out
           </div>

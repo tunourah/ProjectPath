@@ -2,25 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-#nav{
-    
-
-    min-height:100vh;
+#nav {
+    min-height: 100vh;
     max-height: 100%;
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
-    #nav{
-      position: absolute;
-      width:100% !important;
-      right:100%;
-      box-shadow:0 !important;
-      transition:right .5s;
+    #nav {
+        position: absolute;
+        width: 100% !important;
+        right: 100%;
+        box-shadow: 0 !important;
+        transition: right .5s;
     }
- 
-  }
+
+}
 
 .animation_spin {
     animation: spin 10s linear infinite;

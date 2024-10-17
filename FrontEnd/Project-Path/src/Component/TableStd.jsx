@@ -130,7 +130,7 @@ const TableStd = ({ headers }) => {
   };
 
   return (
-    <div className="p-5 m-5 max-w-full">
+    <div className="md:p-5 md:m-5 max-w-full">
       <div className="flex items-center justify-between flex-col md:flex-row flex-wrap space-y-4 md:space-y-0 py-6 px-4 bg-white">
         <div className="flex items-center gap-4">
           <img
