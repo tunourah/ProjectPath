@@ -22,7 +22,8 @@ function Dashboard() {
           <h2 className="text-2xl p-5">
             {" "}
             <span className="font-bold text-4xl">Welcome</span>{" "}
-            {userData.firstName} {userData.secondName}
+            {userData ? userData.firstName : ""}{" "}
+            {userData ? userData.secondName : ""}
           </h2>
           <div className="flex flex-wrap gap-8">
             <StudentCard

@@ -42,7 +42,11 @@ function Nav() {
         {/* for admin */}
         <ul
           className={
-            userData.firstName !== "admin" ? "hidden" : "text-[#6d6d6d]"
+            userData
+              ? userData.firstName !== "admin"
+                ? "hidden"
+                : "text-[#6d6d6d]"
+              : ""
           }
         >
           <li className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-black p-3 transition duration-200">
@@ -88,7 +92,11 @@ function Nav() {
         {/* for student */}
         <ul
           className={
-            userData.firstName !== "admin" ? "text-[#6d6d6d]" : "hidden"
+            userData
+              ? userData.firstName !== "admin"
+                ? "text-[#6d6d6d]"
+                : "hidden"
+              : ""
           }
         >
           <li className="text-lg md:text-xl xs:text-2xl font-bold flex items-center justify-center text-black p-3 transition duration-200">
