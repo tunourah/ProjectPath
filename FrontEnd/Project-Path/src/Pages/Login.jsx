@@ -55,20 +55,25 @@ function Login() {
           secondName: response.data.user.secondName,
           email: response.data.user.email,
           token:response.data.token,
-          isAdmin:response.data.isAdmin
+          isAdmin:response.data.user.isAdmin
         })); // Save token to local storage
         // Redirect or update UI after successful login
+        console.log(response.data.user.isAdmin);
+        // setTimeout(() => {
+          if (response.data.user.isAdmin) {
+            navigate("/dashboard");
+          }else{
+            navigate("/dashboardstd");
+          }
+      
+         
+      
+       
         setEmail("");
         setPassword("");
-        console.log(response.data);
+        
     
-        if (response.data.user.isAdmin === false) {
-          navigate("/dashboardstd");
-        }
-    
-        if (response.data.user.isAdmin === true) {
-          navigate("/dashboard");
-        }
+      
     } catch (err) {
         
     }

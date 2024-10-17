@@ -14,7 +14,7 @@ const ProjectForm = () => {
   const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("user"));
-
+ console.log(userData);
   useEffect(() => {
     if (!userData) {
       navigate("/signup");
@@ -34,7 +34,7 @@ const ProjectForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-            'Authorization':user.token , // Example of adding an auth token
+            'Authorization':userData.token , // Example of adding an auth token
             // Add any other headers you need here
         },
         body: JSON.stringify({
